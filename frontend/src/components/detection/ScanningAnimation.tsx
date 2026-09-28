@@ -27,7 +27,7 @@ export const ScanningAnimation: React.FC<ScanningAnimationProps> = ({ imageUrl }
         {!reducedMotion && (
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-tertiary-fixed to-transparent shadow-[0_0_16px_#95f8a7] animate-bounce"
+            className="scan-beam absolute inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-tertiary-fixed to-transparent shadow-[0_0_16px_#95f8a7]"
             style={{ top: '45%' }}
           />
         )}
@@ -59,7 +59,7 @@ export const ScanningAnimation: React.FC<ScanningAnimationProps> = ({ imageUrl }
               {language === 'bn' ? 'রোগের দাগ ও ধরন বিশ্লেষণ...' : 'Scanning Disease Patterns...'}
             </span>
           </div>
-          <span className="font-label-md text-label-md text-tertiary-fixed font-mono font-bold">AI v2.4</span>
+          <span className="font-label-md text-label-md text-tertiary-fixed font-mono font-bold">su0.1</span>
         </div>
       </div>
 

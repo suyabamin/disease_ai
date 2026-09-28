@@ -5,6 +5,7 @@
 @layer base {
   html, body {
     width: 100%;
+    min-width: 0;
     margin: 0;
     padding: 0;
     background-color: #faf8ff;
@@ -23,6 +24,46 @@
   .pt-safe {
     padding-top: env(safe-area-inset-top, 0px);
   }
+
+  @keyframes page-enter {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scan-beam {
+    0%, 100% { transform: translateY(-34vh); opacity: 0.45; }
+    50% { transform: translateY(34vh); opacity: 1; }
+  }
+
+  @keyframes leaf-drift {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+
+  .app-page {
+    animation: page-enter 260ms ease-out both;
+    overflow-wrap: anywhere;
+  }
+
+  .app-page section,
+  .app-page article {
+    animation: page-enter 340ms ease-out both;
+  }
+
+  .app-page > section:nth-of-type(2),
+  .app-page > article:nth-of-type(2) { animation-delay: 35ms; }
+  .app-page > section:nth-of-type(3),
+  .app-page > article:nth-of-type(3) { animation-delay: 70ms; }
+
+  .app-page button:not(:disabled) {
+    transition: transform 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+  }
+
+  .app-page button:not(:disabled):hover { transform: translateY(-1px); }
+  .app-page button:not(:disabled):active { transform: scale(0.985); }
+
+  .scan-beam { animation: scan-beam 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+  .splash-leaf { animation: leaf-drift 4s ease-in-out infinite; }
 
   /* Accessible Focus Rings */
   *:focus-visible {
@@ -58,4 +99,13 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }

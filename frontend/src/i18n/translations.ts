@@ -2,7 +2,7 @@ import { Translations, Language } from '../types/i18n';
 
 export const translations: Record<Language, Translations> = {
   bn: {
-    appName: "AgroAI Bangladesh",
+    appName: "রুগ্ন-V1",
     appTagline: "এআই চালিত ফসলের রোগ নির্ণয় ব্যবস্থা",
     home: "নীড়",
     detect: "রোগ নির্ণয়",
@@ -50,14 +50,14 @@ export const translations: Record<Language, Translations> = {
     lowConfidenceTitle: "নিশ্চিতভাবে রোগ শনাক্ত করা যায়নি",
     lowConfidenceMessage: "ক্যামেরা বা আলোর কারণে এআই আত্মবিশ্বাসের মাত্রা কম। ভুল পরামর্শ এড়াতে সঠিক ও স্পষ্ট ছবি তুলুন।",
     retakeGuideTitle: "সঠিক ছবি তোলার ৪টি সহজ নিয়ম",
-    noHistoryYet: "এখনো কোনো রোগ পরীক্ষা করা হয়নি",
+    noHistoryYet: "এখনো কোনো স্ক্যানের ইতিহাস নেই",
     helpline: "কৃষি হেল্পলাইন ১৬১২৩ (টোল-ফ্রি)",
     totalScans: "মোট স্ক্যান",
     solvedScans: "সমাধানকৃত",
     uncertainScans: "অনিশ্চিত"
   },
   en: {
-    appName: "AgroAI Bangladesh",
+    appName: "রুগ্ন-V1",
     appTagline: "AI Crop Disease Detection System",
     home: "Home",
     detect: "Detect",
@@ -105,7 +105,7 @@ export const translations: Record<Language, Translations> = {
     lowConfidenceTitle: "Diagnosis Inconclusive",
     lowConfidenceMessage: "AI confidence is low due to photo lighting or focus. To avoid wrong treatment, please take a clearer photo.",
     retakeGuideTitle: "4 Rules for Better Leaf Capture",
-    noHistoryYet: "No detection results yet",
+    noHistoryYet: "No scan history yet",
     helpline: "Agri Helpline 16123 (Toll-Free)",
     totalScans: "Total Scans",
     solvedScans: "Diagnosed",

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { useAccessibility } from '../../context/AccessibilityContext';
 
@@ -31,7 +32,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, 
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-space-md bg-inverse-surface/60 backdrop-blur-sm"
       role="dialog"
@@ -39,7 +40,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, 
       aria-labelledby="modal-title"
     >
       <div
-        className={`w-full max-w-lg bg-surface-container-lowest rounded-2xl shadow-2xl border border-outline-variant flex flex-col overflow-hidden ${
+        className={`w-full max-w-lg max-h-[calc(100dvh-2rem)] bg-surface-container-lowest rounded-2xl shadow-2xl border border-outline-variant flex flex-col overflow-hidden ${
           reducedMotion ? '' : 'animate-in fade-in zoom-in-95 duration-150'
         }`}
       >
@@ -58,7 +59,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, 
         </div>
 
         {/* Modal Body */}
-        <div className="p-space-md flex-1 overflow-y-auto max-h-[70vh]">
+        <div className="p-space-md min-h-0 flex-1 overflow-y-auto max-h-[70vh]">
           {children}
         </div>
 
@@ -69,6 +70,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, 
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

@@ -26,6 +26,7 @@ export interface DetectionResult {
   scientificName?: string;
   confidence: number; // 0 - 100 (percentage)
   riskLevel: RiskLevel;
+  confidenceLevel?: string;
   isHealthy?: boolean;
   symptoms: string[];
   symptomsBn?: string[];

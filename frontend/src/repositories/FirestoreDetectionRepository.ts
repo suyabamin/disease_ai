@@ -6,6 +6,7 @@ import { DetectionResult, HistoryFilterOptions } from '../types/detection';
 export class FirestoreDetectionRepository implements DetectionRepository {
   async saveDetection(userId: string, detection: DetectionResult): Promise<string> {
     if (!db) throw new Error("Firestore instance not available");
+    if (detection.demo) throw new Error('Demo results cannot be saved as scan history.');
 
     const detRef = doc(collection(db, 'users', userId, 'detections'));
     const id = detection.id || detRef.id;
@@ -34,6 +35,8 @@ export class FirestoreDetectionRepository implements DetectionRepository {
         createdAt: data.createdAt?.toDate ? data.createdAt.toDate().toISOString() : (data.createdAt || new Date().toISOString())
       } as DetectionResult;
     });
+
+    results = results.filter((item) => item.demo === false);
 
     if (options?.query) {
       const searchStr = options.query.toLowerCase();
@@ -66,6 +69,7 @@ export class FirestoreDetectionRepository implements DetectionRepository {
     if (!snap.exists()) return null;
 
     const data = snap.data();
+    if (data.demo !== false) return null;
     return {
       ...data,
       id: snap.id,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Trash2, Volume2, Share2, ZoomIn, ShieldCheck, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Trash2, Volume2, Share2, ZoomIn, ShieldCheck, AlertTriangle, Download } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { getDetectionRepository } from '../repositories';
 import { DetectionResult } from '../types/detection';
@@ -12,6 +12,7 @@ import { Modal } from '../components/common/Modal';
 import { Button } from '../components/common/Button';
 import { Toast } from '../components/common/Toast';
 import { AppLayout } from '../components/layout/AppLayout';
+import { generateScanReport } from '../services/report/generateScanReport';
 
 export const HistoryDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -54,6 +55,14 @@ export const HistoryDetailsPage: React.FC = () => {
     } catch (err) {
       console.error("Failed to delete item:", err);
     }
+  };
+
+  const handleReport = () => {
+    if (!item) return;
+    const opened = generateScanReport(item, language);
+    setToastMessage(opened
+      ? (language === 'bn' ? 'রিপোর্ট প্রিন্ট ডায়ালগে খোলা হয়েছে' : 'Report opened for PDF export')
+      : (language === 'bn' ? 'রিপোর্ট খুলতে পপ-আপ অনুমতি দিন' : 'Allow pop-ups to open the report'));
   };
 
   const toggleAudio = () => {
@@ -105,14 +114,24 @@ export const HistoryDetailsPage: React.FC = () => {
             <span>{language === 'bn' ? 'হিস্ট্রি / Back' : 'Back to History'}</span>
           </button>
 
-          <button
-            type="button"
-            onClick={() => setShowDeleteModal(true)}
-            className="min-h-[44px] px-3 py-1.5 rounded-xl bg-error-container/40 text-error hover:bg-error-container font-bold text-label-md flex items-center gap-1"
-          >
-            <Trash2 size={18} />
-            <span>{t.delete}</span>
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={handleReport}
+              className="min-h-[44px] px-3 py-1.5 rounded-xl bg-primary text-on-primary hover:bg-primary-container font-bold text-label-md flex items-center gap-1"
+            >
+              <Download size={18} />
+              <span>PDF</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowDeleteModal(true)}
+              className="min-h-[44px] px-3 py-1.5 rounded-xl bg-error-container/40 text-error hover:bg-error-container font-bold text-label-md flex items-center gap-1"
+            >
+              <Trash2 size={18} />
+              <span>{t.delete}</span>
+            </button>
+          </div>
         </div>
 
         {/* Record ID & Date Strip */}
@@ -131,7 +150,6 @@ export const HistoryDetailsPage: React.FC = () => {
           <div className="flex items-start justify-between gap-2 flex-wrap">
             <div className="flex flex-col gap-1">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-md text-label-md self-start">
-                <span className="text-base">🍅</span>
                 <span className="font-bold text-primary">{item.cropBn || item.crop}</span>
               </div>
               <h1 className="font-headline-lg text-headline-lg font-bold text-on-surface mt-1">
@@ -147,7 +165,7 @@ export const HistoryDetailsPage: React.FC = () => {
             <Badge riskLevel={item.riskLevel} />
           </div>
 
-          <ConfidenceRing confidence={item.confidence} riskLevel={item.riskLevel} />
+          <ConfidenceRing confidence={item.confidence} riskLevel={item.riskLevel} confidenceLevel={item.confidenceLevel} />
 
           <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-surface-container-high shadow-inner">
             <img src={item.imageUrl} alt={item.crop} className="w-full h-full object-cover" />

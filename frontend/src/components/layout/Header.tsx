@@ -10,18 +10,18 @@ export const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
-      <div className="h-24 px-margin flex flex-col justify-center gap-space-xs max-w-5xl mx-auto">
-        <div className="flex items-center justify-between">
+      <div className="h-16 px-4 sm:px-6 lg:px-8 flex items-center max-w-5xl mx-auto">
+        <div className="flex w-full min-w-0 items-center justify-between">
           <div className="flex items-center gap-space-sm cursor-pointer" onClick={() => navigate('/home')}>
             <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary font-bold shadow-sm">
               🌾
             </div>
             <div className="flex flex-col">
               <span className="font-label-lg text-label-lg text-primary leading-tight font-bold">
-                AgroAI
+                রুগ্ন-V1
               </span>
               <span className="font-label-md text-label-md text-on-surface-variant font-medium leading-none">
-                {language === 'bn' ? 'বাংলাদেশ ড্যাশবোর্ড' : 'Bangladesh Portal'}
+                {language === 'bn' ? 'ফসল রোগ শনাক্তকরণ' : 'Crop disease analysis'}
               </span>
             </div>
           </div>
@@ -59,17 +59,6 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Live Connectivity Indicator Bar */}
-        <div className="flex items-center justify-between">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md">
-            <span aria-hidden="true" className="w-2 h-2 rounded-full bg-tertiary-container animate-pulse" />
-            <span className="font-semibold">অনলাইন • Online</span>
-          </div>
-          <div className="text-outline text-label-md font-label-md flex items-center gap-1">
-            <span aria-hidden="true" className="material-symbols-outlined text-[16px]">network_wifi</span>
-            <span>4G High</span>
-          </div>
-        </div>
       </div>
     </header>
   );

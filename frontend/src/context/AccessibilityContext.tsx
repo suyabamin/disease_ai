@@ -27,6 +27,7 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     localStorage.setItem('agroai_a11y_motion', String(reducedMotion));
+    document.documentElement.classList.toggle('reduce-motion', reducedMotion);
   }, [reducedMotion]);
 
   useEffect(() => {

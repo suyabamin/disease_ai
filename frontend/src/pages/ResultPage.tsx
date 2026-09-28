@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Volume2, VolumeX, BookmarkCheck, Share2, ZoomIn, AlertTriangle, ShieldCheck, Sparkles } from 'lucide-react';
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { ArrowLeft, Volume2, VolumeX, Share2, ZoomIn, AlertTriangle, ShieldCheck, Download, RefreshCw } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { DetectionResult } from '../types/detection';
 import { ConfidenceRing } from '../components/detection/ConfidenceRing';
@@ -10,6 +10,7 @@ import { getDetectionRepository } from '../repositories';
 import { useAuth } from '../context/AuthContext';
 import { Toast } from '../components/common/Toast';
 import { AppLayout } from '../components/layout/AppLayout';
+import { generateScanReport } from '../services/report/generateScanReport';
 
 export const ResultPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -24,7 +25,6 @@ export const ResultPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(!result);
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [isSaved, setIsSaved] = useState<boolean>(true);
 
   useEffect(() => {
     if (!result && id) {
@@ -65,14 +65,22 @@ export const ResultPage: React.FC = () => {
   const handleShare = () => {
     if (navigator.share && result) {
       navigator.share({
-        title: `AgroAI Diagnostic: ${result.crop} ${result.disease}`,
-        text: `AgroAI Bangladesh AI Disease Result: ${result.crop} - ${result.disease} (${result.confidence}% accuracy)`,
+        title: `রুগ্ন-V1: ${result.crop} ${result.disease}`,
+        text: `রুগ্ন-V1: ${result.crop} - ${result.disease} (${result.confidence}% confidence)`,
         url: window.location.href
       }).catch(() => {});
     } else {
       navigator.clipboard.writeText(window.location.href);
       setToastMessage(language === 'bn' ? 'লিংক কপি করা হয়েছে' : 'Link copied to clipboard');
     }
+  };
+
+  const handleReport = () => {
+    if (!result) return;
+    const opened = generateScanReport(result, language);
+    setToastMessage(opened
+      ? (language === 'bn' ? 'রিপোর্ট প্রিন্ট ডায়ালগে খোলা হয়েছে' : 'Report opened for PDF export')
+      : (language === 'bn' ? 'রিপোর্ট খুলতে পপ-আপ অনুমতি দিন' : 'Allow pop-ups to open the report'));
   };
 
   if (loading || !result) {
@@ -87,6 +95,8 @@ export const ResultPage: React.FC = () => {
       </AppLayout>
     );
   }
+
+  if (result.demo) return <Navigate to="/detect" replace />;
 
   const symptomsList = (language === 'bn' && result.symptomsBn?.length) ? result.symptomsBn : result.symptoms;
   const actionsList = (language === 'bn' && result.immediateActionsBn?.length) ? result.immediateActionsBn : result.immediateActions;
@@ -116,7 +126,7 @@ export const ResultPage: React.FC = () => {
             </button>
             <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md">
               <ShieldCheck size={16} className="text-primary" />
-              <span>আইডি: #{result.id || 'AG-88294'}</span>
+              <span>{result.id ? `আইডি: #${result.id}` : 'রুগ্ন-V1'}</span>
             </div>
           </div>
 
@@ -139,30 +149,12 @@ export const ResultPage: React.FC = () => {
           </div>
         </div>
 
-        {/* DEMO MODE NOTICE BANNER */}
-        {result.demo && (
-          <div className="p-space-sm rounded-xl bg-secondary-fixed/60 border border-secondary/40 text-on-secondary-fixed flex items-center justify-between shadow-sm">
-            <div className="flex items-center gap-2">
-              <Sparkles size={20} className="text-secondary shrink-0" />
-              <div className="flex flex-col">
-                <span className="font-title-lg text-title-lg font-bold leading-tight">
-                  {t.demoResultNotice}
-                </span>
-                <span className="font-label-md text-label-md text-on-secondary-fixed-variant">
-                  {language === 'bn' ? 'নমুনা/সিমুলেটেড পূর্বাভাস মোড সক্রিয়' : 'Simulated sample prediction mode active'}
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Primary Diagnostic Hero Card */}
         <div className="flex flex-col w-full rounded-2xl bg-surface-container-lowest p-space-md shadow-md border border-outline-variant/40 gap-space-md">
           {/* Crop Identity & Risk Badge */}
           <div className="flex items-start justify-between gap-2 flex-wrap">
             <div className="flex flex-col gap-1">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-md text-label-md self-start">
-                <span className="text-base leading-none">🍅</span>
                 <span className="font-bold text-primary">{result.cropBn || result.crop} • {result.crop}</span>
               </div>
               <h1 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold mt-1 leading-tight">
@@ -180,7 +172,7 @@ export const ResultPage: React.FC = () => {
           </div>
 
           {/* Animated Confidence Score Gauge */}
-          <ConfidenceRing confidence={result.confidence} riskLevel={result.riskLevel} modelVersion={result.modelVersion} />
+          <ConfidenceRing confidence={result.confidence} riskLevel={result.riskLevel} confidenceLevel={result.confidenceLevel} />
 
           {/* Diagnostic Leaf Image Preview */}
           <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-surface-container-high shadow-inner">
@@ -202,7 +194,7 @@ export const ResultPage: React.FC = () => {
             </button>
           </div>
 
-          {/* Action Shortcuts Grid (Voice, Save, Share) */}
+          {/* Action Shortcuts Grid (Voice, Report, Share) */}
           <div className="grid grid-cols-3 gap-space-xs pt-1">
             <button
               type="button"
@@ -220,16 +212,13 @@ export const ResultPage: React.FC = () => {
 
             <button
               type="button"
-              onClick={() => {
-                setIsSaved(true);
-                setToastMessage(t.savedSuccess);
-              }}
-              aria-label="সংরক্ষণ করুন"
+              onClick={handleReport}
+              aria-label={language === 'bn' ? 'PDF রিপোর্ট তৈরি করুন' : 'Generate PDF report'}
               className="min-h-[52px] px-2 py-2 rounded-xl bg-surface-container-high text-on-surface flex flex-col items-center justify-center gap-0.5 hover:bg-surface-variant transition-all active:scale-95"
             >
-              <BookmarkCheck size={22} className="text-surface-tint" />
+              <Download size={22} className="text-surface-tint" />
               <span className="font-label-md text-label-md font-bold">
-                {isSaved ? t.savedSuccess : t.saveResult}
+                {language === 'bn' ? 'PDF রিপোর্ট' : 'PDF report'}
               </span>
             </button>
 
@@ -247,9 +236,30 @@ export const ResultPage: React.FC = () => {
           </div>
         </div>
 
+        {result.topPredictions?.length ? (
+          <section className="flex flex-col bg-surface-container-lowest rounded-2xl p-space-md border border-outline-variant/30 gap-space-xs">
+            <h2 className="font-title-lg text-title-lg text-on-surface font-bold">
+              {language === 'bn' ? 'শীর্ষ পূর্বাভাস' : 'Top predictions'}
+            </h2>
+            {result.topPredictions.map((prediction) => (
+              <div key={prediction.class_id} className="flex items-center justify-between gap-3 py-2 border-b border-outline-variant/20 last:border-0">
+                <span className="font-body-md text-body-md text-on-surface">{prediction.display_name || prediction.disease}</span>
+                <span className="font-label-lg text-label-lg font-bold text-primary">{prediction.confidence_percent}%</span>
+              </div>
+            ))}
+          </section>
+        ) : null}
+
+        {result.quality && (
+          <section className="flex flex-wrap gap-3 bg-surface-container-low p-space-sm rounded-xl border border-outline-variant/30 font-label-md text-on-surface-variant">
+            <span>{language === 'bn' ? 'ছবির মান' : 'Image quality'}: {result.quality.status}</span>
+            {result.quality.flags.map((flag) => <span key={flag}>{flag}</span>)}
+          </section>
+        )}
+
         {/* Actionable Agricultural Information Sections */}
         {/* 1. Key Symptoms */}
-        <div className="flex flex-col bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border border-outline-variant/30 gap-space-xs">
+        {symptomsList.length > 0 && <div className="flex flex-col bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border border-outline-variant/30 gap-space-xs">
           <h2 className="font-title-lg text-title-lg text-on-surface font-bold flex items-center gap-2">
             <span className="material-symbols-outlined text-primary text-[24px]">troubleshoot</span>
             {t.symptoms}
@@ -264,10 +274,10 @@ export const ResultPage: React.FC = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div>}
 
         {/* 2. Immediate Actions */}
-        <div className="flex flex-col bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border border-outline-variant/30 gap-space-xs">
+        {actionsList.length > 0 && <div className="flex flex-col bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border border-outline-variant/30 gap-space-xs">
           <h2 className="font-title-lg text-title-lg text-error font-bold flex items-center gap-2">
             <AlertTriangle size={22} className="text-error" />
             {t.immediateActions}
@@ -282,7 +292,7 @@ export const ResultPage: React.FC = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div>}
 
         {/* 3. Prevention Guidelines */}
         {preventionList.length > 0 && (
@@ -305,7 +315,7 @@ export const ResultPage: React.FC = () => {
         )}
 
         {/* 4. Treatment Guidance */}
-        <div className="flex flex-col bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border border-outline-variant/30 gap-space-xs">
+        {treatmentList.length > 0 && <div className="flex flex-col bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border border-outline-variant/30 gap-space-xs">
           <h2 className="font-title-lg text-title-lg text-tertiary-container font-bold flex items-center gap-2">
             <span className="material-symbols-outlined text-tertiary-container text-[24px]">medical_services</span>
             {t.treatmentGuidance}
@@ -320,13 +330,22 @@ export const ResultPage: React.FC = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div>}
 
         {/* Secondary Agricultural Disclaimer */}
         <div className="p-space-sm rounded-xl bg-surface-container-low border border-outline-variant/30 text-on-surface-variant font-label-md text-label-md flex items-start gap-2">
           <span className="material-symbols-outlined text-[18px] text-outline shrink-0 mt-0.5">info</span>
           <p>{result.disclaimer || t.disclaimer}</p>
         </div>
+
+        <button
+          type="button"
+          onClick={() => navigate('/detect')}
+          className="w-full min-h-[52px] px-space-md py-3 rounded-xl bg-primary text-on-primary font-title-lg font-bold flex items-center justify-center gap-2 hover:bg-primary-container active:scale-[0.99] transition-all"
+        >
+          <RefreshCw size={20} />
+          {language === 'bn' ? 'আরেকটি ছবি স্ক্যান করুন' : 'Scan another image'}
+        </button>
       </div>
     </AppLayout>
   );

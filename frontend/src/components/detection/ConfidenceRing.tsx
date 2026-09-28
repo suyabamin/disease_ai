@@ -6,9 +6,10 @@ interface ConfidenceRingProps {
   confidence: number; // 0 - 100
   riskLevel: 'high' | 'medium' | 'low' | 'unknown';
   modelVersion?: string;
+  confidenceLevel?: string;
 }
 
-export const ConfidenceRing: React.FC<ConfidenceRingProps> = ({ confidence, riskLevel, modelVersion }) => {
+export const ConfidenceRing: React.FC<ConfidenceRingProps> = ({ confidence, riskLevel, confidenceLevel }) => {
   const [displayVal, setDisplayVal] = useState(0);
   const { reducedMotion } = useAccessibility();
   const { language } = useLanguage();
@@ -46,9 +47,10 @@ export const ConfidenceRing: React.FC<ConfidenceRingProps> = ({ confidence, risk
     unknown: 'bg-on-surface-variant'
   };
 
-  const versionLabel = modelVersion
-    ? (language === 'bn' ? `মডেল: ${modelVersion}` : `Model: ${modelVersion}`)
-    : (language === 'bn' ? 'মডেল: CropDisease_EfficientNetB0 v1.0' : 'Model: CropDisease_EfficientNetB0 v1.0');
+  const versionLabel = language === 'bn' ? 'মডেল: su0.1' : 'Model: su0.1';
+  const levelLabel = confidenceLevel
+    ? `${language === 'bn' ? 'আত্মবিশ্বাসের স্তর' : 'Confidence level'}: ${confidenceLevel}`
+    : null;
 
   return (
     <div className="flex flex-col gap-1.5 p-space-sm rounded-xl bg-surface-container-low border border-outline-variant/30">
@@ -76,9 +78,10 @@ export const ConfidenceRing: React.FC<ConfidenceRingProps> = ({ confidence, risk
         />
       </div>
 
-      <p className="font-label-md text-[11px] text-outline text-right">
-        {versionLabel}
-      </p>
+      <div className="flex items-center justify-between gap-2 font-label-md text-[11px] text-outline">
+        <span>{versionLabel}</span>
+        {levelLabel && <span>{levelLabel}</span>}
+      </div>
     </div>
   );
 };

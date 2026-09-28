@@ -43,6 +43,7 @@ export const ForgotPasswordPage: React.FC = () => {
           <div className="w-14 h-14 rounded-2xl bg-primary text-on-primary flex items-center justify-center shadow-lg mb-1">
             <KeyRound size={28} />
           </div>
+          <span className="font-label-md text-label-md font-bold text-primary">{t.appName}</span>
           <h1 className="font-headline-lg text-headline-lg font-bold text-primary">
             {t.forgotPassword}
           </h1>
@@ -53,7 +54,7 @@ export const ForgotPasswordPage: React.FC = () => {
 
         {sent ? (
           <div className="flex flex-col items-center text-center p-space-md bg-tertiary-fixed/30 border border-tertiary-container rounded-2xl gap-3">
-            <CheckCircle2 size={40} className="text-tertiary-container animate-bounce" />
+            <CheckCircle2 size={40} className="text-tertiary-container" />
             <span className="font-title-lg text-title-lg font-bold text-on-surface">
               {language === 'bn' ? 'পাসওয়ার্ড রিসেট লিংক পাঠানো হয়েছে!' : 'Reset link has been sent!'}
             </span>

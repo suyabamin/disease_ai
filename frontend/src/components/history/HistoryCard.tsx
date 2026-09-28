@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Trash2, ChevronRight, MapPin, Calendar } from 'lucide-react';
+import { Trash2, ChevronRight, Calendar } from 'lucide-react';
 import { DetectionResult } from '../../types/detection';
 import { Badge } from '../common/Badge';
 import { useLanguage } from '../../i18n/LanguageContext';
@@ -35,25 +35,21 @@ export const HistoryCard: React.FC<HistoryCardProps> = ({ item, onDelete }) => {
 
         {/* Content Section */}
         <div className="flex flex-col flex-1 min-w-0">
-          <div className="flex items-center justify-between gap-1 mb-1">
+          <div className="flex flex-wrap items-center justify-between gap-1 mb-1">
             <Badge riskLevel={item.riskLevel} />
-            <span className="font-label-md text-label-md text-on-surface-variant whitespace-nowrap flex items-center gap-0.5">
+            <span className="font-label-md text-label-md text-on-surface-variant flex items-center gap-0.5">
               <Calendar size={12} />
               {formattedDate}
             </span>
           </div>
 
-          <h3 className="font-title-lg text-title-lg text-on-surface font-bold truncate mt-0.5">
+          <h3 className="font-title-lg text-title-lg text-on-surface font-bold break-words mt-0.5">
             {language === 'bn' ? (item.cropBn || item.crop) : item.crop} — {language === 'bn' ? (item.diseaseBn || item.disease) : item.disease}
           </h3>
 
-          <div className="flex items-center justify-between mt-1 text-on-surface-variant font-label-md text-label-md">
-            <span className="flex items-center gap-0.5 truncate">
-              <MapPin size={14} className="text-primary" />
-              {item.location || (language === 'bn' ? 'বাংলাদেশ' : 'Bangladesh')}
-            </span>
+          <div className="flex items-center justify-end mt-1 text-on-surface-variant font-label-md text-label-md">
             <span className="font-bold text-primary">
-              {item.confidence}% {language === 'bn' ? 'নিশ্চিত' : 'accuracy'}
+              {item.confidence}% {language === 'bn' ? 'আত্মবিশ্বাস' : 'confidence'}
             </span>
           </div>
         </div>

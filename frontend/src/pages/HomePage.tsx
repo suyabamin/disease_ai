@@ -5,7 +5,6 @@ import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../i18n/LanguageContext';
 import { getDetectionRepository } from '../repositories';
 import { DetectionResult } from '../types/detection';
-import { CROPS_LIST } from '../components/detection/CropSelector';
 import { Badge } from '../components/common/Badge';
 import { AppLayout } from '../components/layout/AppLayout';
 
@@ -22,7 +21,7 @@ export const HomePage: React.FC = () => {
       try {
         const repo = getDetectionRepository();
         const data = await repo.getDetections(user?.uid || 'guest');
-        setRecentScans(data.slice(0, 3));
+        setRecentScans(data.filter((scan) => !scan.demo).slice(0, 3));
       } catch (err) {
         console.error("Failed to load recent scans:", err);
       } finally {
@@ -31,10 +30,6 @@ export const HomePage: React.FC = () => {
     };
     fetchRecent();
   }, [user]);
-
-  const handleCropSelect = (cropId: string) => {
-    navigate(`/detect?crop=${cropId}`);
-  };
 
   return (
     <AppLayout>
@@ -103,40 +98,7 @@ export const HomePage: React.FC = () => {
           </div>
         </section>
 
-        {/* 3. Supported Crops Badge Grid */}
-        <section aria-labelledby="crops-heading" className="flex flex-col bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border border-outline-variant/30">
-          <div className="flex items-center justify-between mb-space-sm">
-            <h2 id="crops-heading" className="font-headline-md text-headline-md text-on-surface font-bold">
-              {t.selectCrop}
-            </h2>
-            <span className="font-label-md text-label-md text-primary font-bold bg-primary-fixed/50 px-2.5 py-1 rounded-full">
-              {language === 'bn' ? '৬টি ফসল সক্রিয়' : '6 Crops Supported'}
-            </span>
-          </div>
-
-          <div className="grid grid-cols-3 sm:grid-cols-6 gap-space-xs">
-            {CROPS_LIST.slice(0, 6).map((c) => (
-              <div
-                key={c.id}
-                role="button"
-                tabIndex={0}
-                onClick={() => handleCropSelect(c.id)}
-                onKeyDown={(e) => e.key === 'Enter' && handleCropSelect(c.id)}
-                className="flex flex-col items-center justify-center p-space-sm bg-surface-container-low hover:bg-surface-container rounded-xl transition-all cursor-pointer text-center min-h-[80px] border border-outline-variant/20 active:scale-95"
-              >
-                <span aria-hidden="true" className="text-3xl mb-1">{c.emoji}</span>
-                <span className="font-label-lg text-label-lg font-bold text-on-surface leading-tight">
-                  {language === 'bn' ? c.bnName : c.enName}
-                </span>
-                <span className="font-label-md text-label-md text-on-surface-variant leading-none text-[11px]">
-                  {c.enName}
-                </span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 4. Recent Detections Timeline Section */}
+        {/* 3. Recent Detections Timeline Section */}
         <section aria-labelledby="recent-records-heading" className="flex flex-col gap-space-sm">
           <div className="flex items-center justify-between px-space-xs">
             <h2 id="recent-records-heading" className="font-headline-md text-headline-md text-on-surface font-bold">
@@ -181,7 +143,7 @@ export const HomePage: React.FC = () => {
                         {language === 'bn' ? `${scan.cropBn || scan.crop} - ${scan.diseaseBn || scan.disease}` : `${scan.crop} - ${scan.disease}`}
                       </h3>
                       <div className="flex items-center justify-between text-on-surface-variant font-label-md text-label-md mt-1">
-                        <span>{scan.location || 'বাংলাদেশ'}</span>
+                        <span>{new Date(scan.createdAt).toLocaleTimeString(language === 'bn' ? 'bn-BD' : 'en-US', { hour: '2-digit', minute: '2-digit' })}</span>
                         <span className="font-bold text-primary">{scan.confidence}%</span>
                       </div>
                     </div>

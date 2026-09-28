@@ -47,7 +47,7 @@ export const LoginPage: React.FC = () => {
             🌾
           </div>
           <h1 className="font-headline-xl text-headline-xl font-bold text-primary">
-            {language === 'bn' ? 'অ্যাগ্রোএআই বাংলাদেশ' : 'AgroAI Bangladesh'}
+            {t.appName}
           </h1>
           <p className="font-title-lg text-title-lg text-on-surface-variant font-medium">
             {t.login}

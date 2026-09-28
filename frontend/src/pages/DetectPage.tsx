@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Brain, Check } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Viewfinder } from '../components/detection/Viewfinder';
@@ -11,10 +11,6 @@ import { useAuth } from '../context/AuthContext';
 import { AppLayout } from '../components/layout/AppLayout';
 
 export const DetectPage: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const initialCrop = searchParams.get('crop') || 'tomato';
-
-  const [selectedCrop, setSelectedCrop] = useState<string>(initialCrop);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
@@ -23,11 +19,6 @@ export const DetectPage: React.FC = () => {
   const { language } = useLanguage();
   const { user } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const cropFromUrl = searchParams.get('crop');
-    if (cropFromUrl) setSelectedCrop(cropFromUrl);
-  }, [searchParams]);
 
   const handleImageSelected = (file: File) => {
     setError(null);
@@ -86,7 +77,13 @@ export const DetectPage: React.FC = () => {
       //    Falls back to URL if no File is available
       const inferenceProvider = getInferenceProvider();
       const inferenceInput: File | string = imageFile || uploadedUrl;
-      const result = await inferenceProvider.analyzeCropImage(inferenceInput, selectedCrop);
+      const result = await inferenceProvider.analyzeCropImage(inferenceInput);
+
+      if (result.demo) {
+        throw new Error(language === 'bn'
+          ? 'প্রকৃত এআই সার্ভার সংযুক্ত নয়। ডেমো ফলাফল সংরক্ষণ করা হয়নি।'
+          : 'The real AI service is not connected. Demo results are not saved.');
+      }
 
       // 3. Attach the stored image URL to the result for display & history
       result.imageUrl = uploadedUrl;
@@ -150,7 +147,7 @@ export const DetectPage: React.FC = () => {
           </button>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md">
             <Brain size={16} className="text-primary" />
-            <span>AI v2.4 কৃষিমডেল</span>
+            <span>su0.1</span>
           </div>
         </div>
 
@@ -168,7 +165,7 @@ export const DetectPage: React.FC = () => {
         <nav aria-label="রোগ নির্ণয় ধাপসমূহ" className="bg-surface-container-lowest p-3.5 rounded-2xl shadow-sm border border-outline-variant/30">
           <ol className="flex items-center justify-between w-full">
             {/* Step 1 */}
-            <li className="flex items-center gap-2 flex-1">
+            <li className="flex min-w-0 items-center gap-2 flex-1">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center font-label-md text-label-md font-bold shadow-sm ${
                 imagePreview ? 'bg-primary text-on-primary' : 'bg-primary-container text-on-primary ring-2 ring-primary-fixed'
               }`}>
@@ -183,7 +180,7 @@ export const DetectPage: React.FC = () => {
             <div aria-hidden="true" className="w-6 h-0.5 bg-primary mr-2" />
 
             {/* Step 2 */}
-            <li className={`flex items-center gap-2 flex-1 ${isAnalyzing ? 'opacity-100' : 'opacity-70'}`}>
+            <li className={`flex min-w-0 items-center gap-2 flex-1 ${isAnalyzing ? 'opacity-100' : 'opacity-70'}`}>
               <div className={`w-8 h-8 rounded-full flex items-center justify-center font-label-md text-label-md font-bold ${
                 isAnalyzing ? 'bg-primary text-on-primary animate-pulse' : 'bg-surface-container text-on-surface-variant'
               }`}>
@@ -198,7 +195,7 @@ export const DetectPage: React.FC = () => {
             <div aria-hidden="true" className="w-6 h-0.5 bg-surface-container-high mr-2" />
 
             {/* Step 3 */}
-            <li className="flex items-center gap-2 opacity-50 flex-1">
+            <li className="flex min-w-0 items-center gap-2 opacity-50 flex-1">
               <div className="w-8 h-8 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-label-md text-label-md font-semibold">
                 ৩
               </div>

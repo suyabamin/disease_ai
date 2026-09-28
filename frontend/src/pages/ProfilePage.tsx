@@ -131,10 +131,10 @@ export const ProfilePage: React.FC = () => {
             </div>
 
             <div className="flex flex-col min-w-0">
-              <h1 className="font-headline-md text-headline-md font-bold text-on-surface truncate">
+              <h1 className="font-headline-md text-headline-md font-bold text-on-surface break-words">
                 {user?.displayName || (language === 'bn' ? 'রফিকুল ইসলাম' : 'Rafiqul Islam')}
               </h1>
-              <p className="font-label-md text-label-md text-on-surface-variant truncate">
+              <p className="font-label-md text-label-md text-on-surface-variant break-words">
                 {user?.email || 'rafiqul.farmer@agroai.bd'}
               </p>
 
@@ -178,7 +178,7 @@ export const ProfilePage: React.FC = () => {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-xs mt-1">
-            <div className="p-3 rounded-xl bg-surface-container-low flex items-center justify-between">
+            <div className="p-3 rounded-xl bg-surface-container-low flex flex-wrap items-center justify-between gap-2">
               <span className="font-label-md text-label-md font-semibold text-on-surface">Firebase Auth & Database</span>
               <span className={`px-2.5 py-0.5 rounded-full font-label-md text-[12px] font-bold ${
                 isFirebaseConfigured ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-secondary-fixed text-on-secondary-fixed'
@@ -187,12 +187,12 @@ export const ProfilePage: React.FC = () => {
               </span>
             </div>
 
-            <div className="p-3 rounded-xl bg-surface-container-low flex items-center justify-between">
+            <div className="p-3 rounded-xl bg-surface-container-low flex flex-wrap items-center justify-between gap-2">
               <span className="font-label-md text-label-md font-semibold text-on-surface">AI Inference Service</span>
               <span className={`px-2.5 py-0.5 rounded-full font-label-md text-[12px] font-bold ${
                 isDemoMode ? 'bg-secondary-fixed text-on-secondary-fixed' : 'bg-tertiary-fixed text-on-tertiary-fixed'
               }`}>
-                {isDemoMode ? 'Demo Inference Mode' : 'Live API Connected'}
+                {isDemoMode ? 'Demo Inference Mode' : 'AI model: su0.1'}
               </span>
             </div>
           </div>
@@ -206,7 +206,7 @@ export const ProfilePage: React.FC = () => {
           </h2>
 
           {/* Language Switch */}
-          <div className="flex items-center justify-between p-3 rounded-xl bg-surface-container-low">
+          <div className="flex flex-col items-start gap-2 p-3 rounded-xl bg-surface-container-low sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-col">
               <span className="font-body-bold text-body-bold text-on-surface">
                 {language === 'bn' ? 'অ্যাপের ভাষা (App Language)' : 'Application Language'}
@@ -219,7 +219,7 @@ export const ProfilePage: React.FC = () => {
             <button
               type="button"
               onClick={toggleLanguage}
-              className="min-h-[48px] px-4 rounded-xl bg-primary text-on-primary font-bold text-label-lg shadow hover:bg-primary-container"
+              className="min-h-[48px] max-w-full px-4 rounded-xl bg-primary text-on-primary font-bold text-label-lg shadow hover:bg-primary-container"
             >
               {language === 'bn' ? 'English এ যান' : 'বাংলায় রূপান্তর'}
             </button>

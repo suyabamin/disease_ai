@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft, HelpCircle, AlertTriangle, RefreshCw, Volume2, Camera, Sun, Focus, Crop as CropIcon } from 'lucide-react';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { ArrowLeft, HelpCircle, AlertTriangle, RefreshCw, Volume2, Camera, Sun, Focus, Crop as CropIcon, Download } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { DetectionResult } from '../types/detection';
 import { TTSService } from '../services/audio/ttsService';
 import { AppLayout } from '../components/layout/AppLayout';
+import { generateScanReport } from '../services/report/generateScanReport';
+import { Toast } from '../components/common/Toast';
 
 export const LowConfidencePage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { language, t } = useLanguage();
 
-  const result = (location.state as { result?: DetectionResult })?.result || {
-    confidence: 42.0,
-    imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAVRDQyQYPMgApb8QGHj_Hi-V96M2TE_x5wPP1TzFSJBCWjOeWlRP4QYM8OGuxooW2x5-dJzPlHlt0WROcui3zCYYGOvdIvAk5qSotV7DLHYC6jr3Vl3aGEGR9SHCzTqGthAYfK0TfTQ42qGvgYfIWvJwXCSZDYYKOSdpuGdhXGDuze2r-tEfSJYcI1R250DgUC-PyqJheL0EC800rjPH0FA0US7Jgyme4jNmQCF4NTjB0nH5ve09Ym'
-  };
-
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const result = (location.state as { result?: DetectionResult })?.result;
+
+  if (!result || result.demo) return <Navigate to="/detect" replace />;
+
+  const handleReport = () => {
+    const opened = generateScanReport(result, language);
+    setToastMessage(opened
+      ? (language === 'bn' ? 'রিপোর্ট প্রিন্ট ডায়ালগে খোলা হয়েছে' : 'Report opened for PDF export')
+      : (language === 'bn' ? 'রিপোর্ট খুলতে পপ-আপ অনুমতি দিন' : 'Allow pop-ups to open the report'));
+  };
 
   const handleVoiceAdvice = () => {
     const speechText = language === 'bn'
@@ -35,6 +43,7 @@ export const LowConfidencePage: React.FC = () => {
   return (
     <AppLayout>
       <div className="flex flex-col w-full gap-space-md pb-12">
+        {toastMessage && <Toast message={toastMessage} type="success" onClose={() => setToastMessage(null)} />}
         {/* Navigation & Stepper Header */}
         <div className="flex flex-col gap-space-xs bg-surface-container-lowest p-space-md rounded-2xl shadow-sm border border-outline-variant/30">
           <div className="flex items-center justify-between">
@@ -47,8 +56,8 @@ export const LowConfidencePage: React.FC = () => {
               <span>{language === 'bn' ? 'স্ক্যানার' : 'Scanner'}</span>
             </button>
             <div className="flex flex-col items-end text-label-md">
-              <span className="font-bold text-on-surface">আইডি: #AG-88301</span>
-              <span className="text-on-surface-variant">Uncertain Scan</span>
+              <span className="font-bold text-on-surface">su0.1</span>
+              <span className="text-on-surface-variant">{result.id ? `#${result.id}` : (language === 'bn' ? 'অনিশ্চিত স্ক্যান' : 'Uncertain scan')}</span>
             </div>
           </div>
 
@@ -83,7 +92,7 @@ export const LowConfidencePage: React.FC = () => {
                 {t.lowConfidenceTitle}
               </h1>
               <p className="font-label-md text-label-md text-on-secondary-fixed-variant mt-0.5 font-medium">
-                Diagnosis Inconclusive • AI Confidence Low ({result.confidence}%)
+                {language === 'bn' ? 'অনিশ্চিত ফলাফল' : 'Uncertain result'} • {result.confidence}%
               </p>
             </div>
           </div>
@@ -95,9 +104,7 @@ export const LowConfidencePage: React.FC = () => {
                 <span className="material-symbols-outlined text-secondary text-[20px]">speed</span>
                 {t.confidence}
               </span>
-              <span className="font-headline-md text-headline-md font-bold text-secondary">
-                {result.confidence}% (Uncertain)
-              </span>
+              <span className="font-headline-md text-headline-md font-bold text-secondary">{result.confidence}%</span>
             </div>
 
             <div className="w-full bg-surface-container-high h-3 rounded-full overflow-hidden flex">
@@ -105,9 +112,9 @@ export const LowConfidencePage: React.FC = () => {
             </div>
 
             <div className="flex justify-between items-center text-outline font-label-md text-label-md">
-              <span>০% ঝুঁকিপূর্ণ</span>
-              <span>৭০% নিরাপদ সীমা</span>
-              <span>১০০% নিশ্চিত</span>
+              <span>0%</span>
+              {result.confidenceLevel && <span>{result.confidenceLevel}</span>}
+              <span>100%</span>
             </div>
           </div>
 
@@ -115,64 +122,60 @@ export const LowConfidencePage: React.FC = () => {
           <div className="flex items-start gap-space-sm bg-surface-container-lowest/80 p-space-sm rounded-xl border border-outline-variant/20">
             <AlertTriangle size={20} className="text-secondary shrink-0 mt-0.5" />
             <p className="font-label-md text-label-md text-on-surface leading-snug">
-              <strong className="text-secondary font-bold">সতর্কবার্তা:</strong> ভুল কীটনাশক বা ওষুধ প্রয়োগে ধানের ও ফসলের দীর্ঘমেয়াদী ক্ষতি এড়াতে এআই কোনো কাল্পনিক বা অনুমানভিত্তিক রোগের নাম দেখাচ্ছে না।
+              {result.disclaimer || t.disclaimer}
             </p>
           </div>
 
           {/* Audio Advice Button */}
-          <button
-            type="button"
-            onClick={handleVoiceAdvice}
-            className={`min-h-[48px] w-full px-space-md py-space-xs rounded-full font-body-bold text-body-bold flex items-center justify-center gap-2 shadow transition-all ${
-              isSpeaking ? 'bg-secondary-container text-on-secondary-container animate-pulse' : 'bg-secondary text-on-secondary hover:bg-on-secondary-container'
-            }`}
-          >
-            <Volume2 size={22} />
-            <span>{t.listenVoice}</span>
-          </button>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={handleVoiceAdvice}
+                className={`min-h-[48px] w-full px-space-sm py-space-xs rounded-xl font-body-bold text-body-bold flex items-center justify-center gap-2 shadow transition-all ${
+                  isSpeaking ? 'bg-secondary-container text-on-secondary-container animate-pulse' : 'bg-secondary text-on-secondary hover:bg-on-secondary-container'
+                }`}
+              >
+                <Volume2 size={22} />
+                <span>{t.listenVoice}</span>
+              </button>
+              <button type="button" onClick={handleReport} className="min-h-[48px] w-full px-space-sm py-space-xs rounded-xl bg-primary text-on-primary font-body-bold text-body-bold flex items-center justify-center gap-2">
+                <Download size={20} />
+                <span>{language === 'bn' ? 'PDF রিপোর্ট' : 'PDF report'}</span>
+              </button>
+            </div>
         </div>
 
-        {/* Breakdown of Analysis Bottlenecks */}
-        <div className="flex flex-col bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/30 p-space-md gap-space-md">
-          <div className="flex items-center justify-between">
+        <section className="flex flex-col bg-surface-container-lowest rounded-2xl border border-outline-variant/30 p-space-md gap-space-sm">
+          <h2 className="font-title-lg text-title-lg text-on-surface font-bold">
+            {language === 'bn' ? 'স্ক্যান করা ছবি' : 'Scanned image'}
+          </h2>
+          <img src={result.imageUrl} alt={language === 'bn' ? 'স্ক্যান করা ফসলের পাতা' : 'Scanned crop leaf'} className="w-full max-h-[420px] rounded-xl object-contain bg-surface-container-low" />
+        </section>
+
+        {result.topPredictions?.[0] && (
+          <section className="flex flex-col bg-surface-container-lowest rounded-2xl border border-outline-variant/30 p-space-md gap-1">
+            <h2 className="font-title-lg text-title-lg text-on-surface font-bold">
+              {language === 'bn' ? 'শীর্ষ সম্ভাব্য পূর্বাভাস (অনিশ্চিত)' : 'Top model estimate (uncertain)'}
+            </h2>
+            <p className="font-body-md text-body-md text-on-surface">{result.topPredictions[0].crop} · {result.topPredictions[0].display_name}</p>
+            <p className="font-label-md text-label-md text-on-surface-variant">{result.topPredictions[0].confidence_percent}%</p>
+          </section>
+        )}
+
+        {result.quality && (
+          <section className="flex flex-col bg-surface-container-lowest rounded-2xl border border-outline-variant/30 p-space-md gap-space-sm">
             <h2 className="font-title-lg text-title-lg text-on-surface font-bold flex items-center gap-2">
               <Camera size={22} className="text-primary" />
-              {language === 'bn' ? 'গৃহীত ছবি পর্যালোচনা' : 'Captured Photo Review'}
+              {language === 'bn' ? 'ছবির মানের তথ্য' : 'Image quality details'}
             </h2>
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-bold">
-              {language === 'bn' ? 'ত্রুটিপূর্ণ ছবি' : 'Issue Detected'}
-            </span>
-          </div>
-
-          <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-surface-container">
-            <img src={result.imageUrl} alt="অস্পষ্ট ছবি" className="w-full h-full object-cover opacity-90" />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-space-sm text-white font-label-md text-label-md">
-              {language === 'bn' ? 'অস্পষ্ট / অতিরিক্ত আলো-ছায়ার মিশ্রণ ধরা পড়েছে' : 'Blur or illumination imbalance detected'}
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-space-xs">
-            <span className="font-label-lg text-label-lg font-bold text-on-surface">
-              {language === 'bn' ? 'যে কারণে এআই নিশ্চিত হতে পারছে না:' : 'Why AI confidence is low:'}
-            </span>
-
-            <div className="flex items-start gap-space-sm p-3 bg-surface-container-low rounded-xl">
-              <div className="w-6 h-6 rounded-full bg-error text-on-error flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✕</div>
-              <div className="flex flex-col">
-                <span className="font-body-bold text-body-bold text-on-surface">অস্পষ্ট দাগ ও ফোকাসের ঘাটতি</span>
-                <span className="font-label-md text-label-md text-on-surface-variant">ক্যামেরা নড়ে যাওয়ায় ছত্রাক বা পোকার লক্ষণ পরিষ্কার নয় (Motion blur)।</span>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-space-sm p-3 bg-surface-container-low rounded-xl">
-              <div className="w-6 h-6 rounded-full bg-error text-on-error flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✕</div>
-              <div className="flex flex-col">
-                <span className="font-body-bold text-body-bold text-on-surface">আলোর বৈষম্য ও তীব্র ছায়া</span>
-                <span className="font-label-md text-label-md text-on-surface-variant">সরাসরি রোদ বা ছায়ার কারণে পাতার স্বাভাবিক সবুজ বর্ণ বিকৃত হয়েছে।</span>
-              </div>
-            </div>
-          </div>
-        </div>
+            <p className="font-body-md text-body-md text-on-surface-variant">{result.quality.status}</p>
+            {result.quality.flags.length > 0 && (
+              <ul className="flex flex-col gap-2">
+                {result.quality.flags.map((flag) => <li key={flag} className="font-label-md text-label-md">{flag}</li>)}
+              </ul>
+            )}
+          </section>
+        )}
 
         {/* 4-Step Illustrated Guide: How to Retake a Good Photo */}
         <div className="flex flex-col bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/30 p-space-md gap-space-md">
@@ -180,7 +183,7 @@ export const LowConfidencePage: React.FC = () => {
             {t.retakeGuideTitle}
           </h2>
 
-          <div className="grid grid-cols-2 gap-space-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
             <div className="flex flex-col p-3 rounded-xl bg-surface-container-low gap-1">
               <Sun size={24} className="text-secondary" />
               <span className="font-body-bold text-body-bold text-on-surface">১. পর্যাপ্ত আলো</span>

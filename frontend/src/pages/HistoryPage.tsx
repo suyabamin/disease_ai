@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Download, ArrowLeft, Trash2, Calendar } from 'lucide-react';
+import { Search, ArrowLeft, Trash2, Calendar } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { getDetectionRepository } from '../repositories';
 import { DetectionResult, RiskLevel } from '../types/detection';
@@ -69,7 +69,7 @@ export const HistoryPage: React.FC = () => {
           <Toast message={toastMessage} type="success" onClose={() => setToastMessage(null)} />
         )}
 
-        {/* Top Header & Export PDF Button */}
+        {/* Top Header */}
         <div className="flex flex-col gap-space-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-space-xs">
@@ -90,16 +90,6 @@ export const HistoryPage: React.FC = () => {
                 </span>
               </div>
             </div>
-
-            <button
-              type="button"
-              onClick={() => setToastMessage(language === 'bn' ? 'পিডিএফ রিপোর্ট তৈরি হচ্ছে...' : 'Exporting PDF report...')}
-              aria-label="রিপোর্ট ডাউনলোড • Export PDF"
-              className="min-h-[48px] px-3 flex items-center gap-1.5 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-colors text-primary font-bold focus:outline-none focus:ring-2 focus:ring-primary shadow-sm"
-            >
-              <Download size={18} />
-              <span>PDF</span>
-            </button>
           </div>
 
           {/* Quick Aggregate Stats Summary Grid */}

@@ -143,6 +143,7 @@ export class ApiInferenceProvider implements InferenceProvider {
         disease: topName,
         confidence: topConf * 100,  // store as percentage for display
         riskLevel: 'unknown',
+        confidenceLevel: data.confidence_level,
         isHealthy: false,
         uncertain: true,
         margin: (data as any).margin ?? 0,
@@ -178,6 +179,7 @@ export class ApiInferenceProvider implements InferenceProvider {
       disease: pred.display_name,   // "Tomato Late Blight"
       confidence: confPct,           // stored as 0–100
       riskLevel: confidenceToRiskLevel(pred.confidence),
+      confidenceLevel: data.confidence_level,
       isHealthy: pred.disease.toLowerCase().includes('healthy'),
       uncertain: false,
       margin: (data as any).margin ?? 0,

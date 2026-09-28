@@ -47,11 +47,12 @@ export const RegisterPage: React.FC = () => {
           <div className="w-14 h-14 rounded-2xl bg-primary text-on-primary flex items-center justify-center text-2xl shadow-lg mb-1">
             🌾
           </div>
+          <span className="font-label-md text-label-md font-bold text-primary">{t.appName}</span>
           <h1 className="font-headline-lg text-headline-lg font-bold text-primary">
             {t.createAccount}
           </h1>
           <p className="font-label-lg text-label-lg text-on-surface-variant">
-            {language === 'bn' ? 'সহজে ডিজিটাল কৃষি সেবায় যুক্ত হোন' : 'Join AgroAI Bangladesh'}
+            {language === 'bn' ? 'সহজে ডিজিটাল কৃষি সেবায় যুক্ত হোন' : `Join ${t.appName}`}
           </p>
         </div>
 

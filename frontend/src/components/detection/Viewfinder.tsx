@@ -53,7 +53,7 @@ export const Viewfinder: React.FC<ViewfinderProps> = ({
       {/* Main Aspect Square Viewfinder Box */}
       <section
         aria-label="ক্যামেরা স্ক্যান ফ্রেম"
-        className="relative w-full aspect-square rounded-3xl overflow-hidden shadow-xl bg-inverse-surface text-inverse-on-surface flex items-center justify-center border-2 border-outline-variant/30"
+        className="relative w-full aspect-[4/3] sm:aspect-square rounded-3xl overflow-hidden shadow-xl bg-inverse-surface text-inverse-on-surface flex items-center justify-center border-2 border-outline-variant/30"
       >
         {imagePreview ? (
           /* Selected Image Preview Mode */
@@ -162,10 +162,10 @@ export const Viewfinder: React.FC<ViewfinderProps> = ({
             type="button"
             onClick={onAnalyze}
             disabled={isAnalyzing}
-            className="w-full min-h-[56px] px-space-md py-3.5 rounded-xl bg-primary text-on-primary font-headline-md font-bold flex items-center justify-center gap-2 shadow-lg hover:bg-primary-container active:scale-[0.99] transition-all focus:outline-none focus:ring-4 focus:ring-primary-fixed"
+            className="w-full min-h-[48px] min-w-0 px-3 py-2 rounded-xl bg-primary text-on-primary font-title-lg font-bold flex items-center justify-center gap-2 shadow-lg hover:bg-primary-container active:scale-[0.99] transition-all focus:outline-none focus:ring-4 focus:ring-primary-fixed"
           >
-            <Sparkles size={24} className="animate-spin" style={{ animationDuration: '3s' }} />
-            <span>{language === 'bn' ? 'এআই বিশ্লেষণ শুরু করুন (Analyze)' : 'Analyze Leaf with AI'}</span>
+            <Sparkles size={20} className="shrink-0" />
+            <span className="min-w-0 text-center">{language === 'bn' ? 'এআই বিশ্লেষণ শুরু করুন (Analyze)' : 'Analyze Leaf with AI'}</span>
           </button>
         </div>
       ) : (
