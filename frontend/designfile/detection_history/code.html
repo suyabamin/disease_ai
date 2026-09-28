@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html lang="bn"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>AgroAI Bangladesh</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&amp;family=Noto+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#faf8ff;color:#131b2e;-webkit-tap-highlight-color:transparent;}body{overscroll-behavior-y:none;font-family:'Noto Sans Bengali','Noto Sans',sans-serif;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-tint": "#2a6b2c", "on-error": "#ffffff", "surface-bright": "#faf8ff", "surface-variant": "#dae2fd", "on-tertiary-container": "#78da8b", "tertiary-fixed-dim": "#79db8d", "on-tertiary-fixed-variant": "#005323", "on-tertiary-fixed": "#00210a", "on-surface": "#131b2e", "surface-container-high": "#e2e7ff", "outline-variant": "#c0c9bb", "tertiary-fixed": "#95f8a7", "surface-dim": "#d2d9f4", "surface-container-highest": "#dae2fd", "on-secondary-fixed": "#331200", "primary-fixed-dim": "#91d78a", "on-secondary-container": "#682c00", "surface": "#faf8ff", "outline": "#717a6d", "on-background": "#131b2e", "primary-container": "#1b5e20", "secondary-fixed": "#ffdbca", "on-primary-fixed": "#002203", "inverse-surface": "#283044", "inverse-on-surface": "#eef0ff", "error-container": "#ffdad6", "on-primary-container": "#90d689", "error": "#ba1a1a", "secondary-container": "#fd8a42", "surface-container-low": "#f2f3ff", "secondary": "#9b4500", "on-tertiary": "#ffffff", "tertiary-container": "#005f29", "on-primary": "#ffffff", "surface-container": "#eaedff", "secondary-fixed-dim": "#ffb68e", "primary-fixed": "#acf4a4", "on-secondary": "#ffffff", "tertiary": "#00451c", "inverse-primary": "#91d78a", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#763300", "background": "#faf8ff", "on-surface-variant": "#41493e", "primary": "#00450d", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#0c5216" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-md": "1rem", "margin-desktop": "2rem", "space-lg": "1.5rem", "gutter": "1rem", "space-xl": "2rem", "space-xs": "0.25rem", "margin": "1rem", "space-sm": "0.5rem", "gutter-desktop": "1.5rem" }, fontFamily: { "body-md": ["Noto Sans"], "body-lg": ["Noto Sans"], "title-lg": ["Noto Sans"], "label-lg": ["Noto Sans"], "headline-xl": ["Noto Sans"], "body-bold": ["Noto Sans"], "headline-lg-mobile": ["Noto Sans"], "headline-xl-mobile": ["Noto Sans"], "headline-lg": ["Noto Sans"], "label-md": ["Noto Sans"], "headline-md": ["Noto Sans"] }, fontSize: { "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }], "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }], "title-lg": ["18px", { lineHeight: "26px", fontWeight: "600" }], "label-lg": ["15px", { lineHeight: "20px", fontWeight: "600" }], "headline-xl": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }], "body-bold": ["16px", { lineHeight: "24px", fontWeight: "600" }], "headline-lg-mobile": ["22px", { lineHeight: "30px", fontWeight: "700" }], "headline-xl-mobile": ["26px", { lineHeight: "34px", letterSpacing: "-0.01em", fontWeight: "700" }], "headline-lg": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-md": ["13px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "600" }], "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-24 px-margin flex flex-col justify-center gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="AgroAI Bangladesh Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UuiAhrUJ1g4R_c9tgW_lt3EScDCYp_C5sOX0vYwct8DO0umHlESKF6GpNw7bG1s-_jY1rb-4-KvLbkJhkf5ir61xStZmjtudKS8k00ziJFTiFNOuJ3kGIVka17QdBPUYD6tM7ifmIwSqJXICmqy3RoPU7pkRpV-oZcvWzQZLhop_4AVX_thD5PavH_cNOv8tnRZG41CPnzbfef4dhTcOT7tPxgLXxah40NQiixIpCUdoY-QWmy6pidhEk"/><div class="flex flex-col"><span class="font-label-lg text-label-lg text-primary leading-tight font-bold">AgroAI</span><span class="font-label-md text-label-md text-on-surface-variant font-medium leading-none">হিস্ট্রি (Diagnostic History)</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Change Language to Bengali or English" class="min-h-[44px] min-w-[44px] px-space-sm py-space-xs flex items-center justify-center rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" type="button"><span class="font-label-md text-label-md font-bold text-primary">বাংলা</span><span class="font-label-md text-label-md mx-0.5 text-outline">|</span><span class="font-label-md text-label-md font-medium text-on-surface-variant">EN</span></button><button aria-label="User Profile" class="min-h-[44px] min-w-[44px] p-0.5 flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-primary" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvnzK7UjoSeXsT9OOH3XWipjnFQCT3eL7sTTSlkxnzvPpkZ1ODBU9JNwzpIRFm3jzEC8E_lyB1zZUOVYqOejjAyXPW_zGJ-hSlSdsgYXeITvOucE6njsq8X_IgAtfFKFaAwqKy0KAOUGNNhv9mfscHs8WCR5liQCo0dB3oBiftUAfERG_3dqCml-7iz1Qn_KdUjw6oP9N5myxgIgrMrSFwXKkMIAGc4SPR5UU2cBt9fHAzLBstKcvZ"/></button></div></div><div class="flex items-center justify-between"><div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md"><span aria-hidden="true" class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span><span class="font-medium">অনলাইন • Online</span></div><div class="text-outline text-label-md font-label-md flex items-center gap-1"><span aria-hidden="true" class="material-symbols-outlined text-[16px]">network_wifi</span><span>4G High</span></div></div></div></header><main class="flex flex-col relative w-full pt-24 pb-28 bg-surface px-margin min-h-screen"><div class="flex flex-col w-full pb-8">
+<!-- Top Section: Diagnostic History Title, Subtitle & Aggregate Stat Badges -->
+<div class="flex flex-col gap-space-sm mb-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<a aria-label="ফিরে যান • Go Back" class="min-h-[48px] min-w-[48px] flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high transition-colors focus:outline-none focus:ring-2 focus:ring-primary" href="#">
+<span class="material-symbols-outlined text-primary text-[24px]">arrow_back</span>
+</a>
+<div class="flex flex-col">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">রোগ নির্ণয়ের ইতিহাস</h1>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">Scan History &amp; Diagnostic Logs</span>
+</div>
+</div>
+<button aria-label="রিপোর্ট ডাউনলোড • Export PDF" class="min-h-[48px] px-space-sm flex items-center gap-1 rounded-xl bg-surface-container-high hover:bg-surface-container-highest transition-colors text-primary focus:outline-none focus:ring-2 focus:ring-primary" type="button">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span class="font-label-md text-label-md font-bold">PDF</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+      আপনার পূর্বে সম্পন্ন করা সকল ফসলের রোগ স্ক্যান, ফলাফল ও কৃষি পরামর্শের বিস্তারিত তালিকা।
+    </p>
+<!-- Quick Stats Summary Pill Grid -->
+<div class="grid grid-cols-3 gap-2 mt-1">
+<div class="flex flex-col p-2.5 rounded-xl bg-surface-container-low shadow-sm">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">analytics</span>মোট স্ক্যান
+        </span>
+<span class="font-headline-md text-headline-md text-primary font-bold mt-0.5">২৪<span class="font-label-md text-label-md font-normal text-on-surface-variant ml-0.5">টি</span></span>
+</div>
+<div class="flex flex-col p-2.5 rounded-xl bg-surface-container-low shadow-sm">
+<span class="font-label-md text-label-md text-tertiary-container flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">verified</span>সমাধানকৃত
+        </span>
+<span class="font-headline-md text-headline-md text-primary-container font-bold mt-0.5">১৯<span class="font-label-md text-label-md font-normal text-on-surface-variant ml-0.5">টি</span></span>
+</div>
+<div class="flex flex-col p-2.5 rounded-xl bg-surface-container-low shadow-sm">
+<span class="font-label-md text-label-md text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">help_center</span>অনিশ্চিত
+        </span>
+<span class="font-headline-md text-headline-md text-secondary font-bold mt-0.5">০৫<span class="font-label-md text-label-md font-normal text-on-surface-variant ml-0.5">টি</span></span>
+</div>
+</div>
+</div>
+<!-- Search & Filter Controls -->
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<!-- Accessible Search Field -->
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</div>
+<input aria-label="রোগ বা ফসলের নাম দিয়ে খুঁজুন" class="w-full min-h-[48px] pl-11 pr-4 bg-surface-container-lowest rounded-xl text-on-surface font-body-md text-body-md placeholder-on-surface-variant focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" id="disease-search" placeholder="রোগ বা ফসলের নাম দিয়ে খুঁজুন..." type="search"/>
+</div>
+<!-- Horizontal Quick Filter Chips (Touch Scrollable) -->
+<div aria-label="ফিল্টার তালিকা" class="flex items-center gap-2 overflow-x-auto pb-1 pt-0.5 scrollbar-none" role="toolbar">
+<button class="min-h-[48px] px-4 rounded-full bg-primary text-on-primary font-label-md text-label-md whitespace-nowrap shadow-sm flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-primary" type="button">
+<span class="material-symbols-outlined text-[16px]">done</span>
+<span>সকল (All)</span>
+</button>
+<button class="min-h-[48px] px-3.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md whitespace-nowrap flex items-center gap-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary" type="button">
+<span>🍅 টমেটো</span>
+</button>
+<button class="min-h-[48px] px-3.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md whitespace-nowrap flex items-center gap-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary" type="button">
+<span>🌾 ধান</span>
+</button>
+<button class="min-h-[48px] px-3.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md whitespace-nowrap flex items-center gap-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-primary" type="button">
+<span>🥔 আলু</span>
+</button>
+<button class="min-h-[48px] px-3.5 rounded-full bg-surface-container hover:bg-surface-container-high text-error font-label-md text-label-md whitespace-nowrap flex items-center gap-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-error" type="button">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+<span>উচ্চ ঝুঁকি</span>
+</button>
+<button class="min-h-[48px] px-3.5 rounded-full bg-surface-container hover:bg-surface-container-high text-secondary font-label-md text-label-md whitespace-nowrap flex items-center gap-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-secondary" type="button">
+<span class="material-symbols-outlined text-[16px]">help</span>
+<span>অনিশ্চিত</span>
+</button>
+</div>
+<!-- Sort & Date Dropdown Pill -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="font-label-md text-label-md">সাম্প্রতিক স্ক্যানসমূহ</span>
+</div>
+<button aria-label="সাজানোর ক্রম পরিবর্তন করুন" class="min-h-[48px] px-2 flex items-center gap-1 font-label-md text-label-md text-primary font-bold focus:outline-none focus:ring-2 focus:ring-primary rounded-lg" type="button">
+<span>নতুন থেকে পুরাতন</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Diagnostic Scan Timeline Group 1: Today -->
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<!-- Date Header Sticky Accent -->
+<div class="flex items-center gap-2 py-1">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<h2 class="font-title-lg text-title-lg text-on-surface font-bold">আজ • ২৫ অক্টোবর ২০২৪ <span class="font-label-md text-label-md text-on-surface-variant font-normal">(Today)</span></h2>
+</div>
+<!-- Card 1: High Confidence & High Risk (Early Blight on Tomato) -->
+<div class="flex flex-col w-full bg-surface-container-lowest rounded-xl shadow-md p-space-md gap-space-sm transition-all hover:shadow-lg">
+<div class="flex gap-space-sm">
+<!-- Thumbnail -->
+<div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img alt="টমেটোর পাতায় আর্লি ব্লাইট রোগের ঘন কেন্দ্রিক বৃত্তাকার দাগ" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WofbKvuxO-4gLCnwvplL2PZ01J6ejBvipkbGrmeYYbu5_gzFbzl2fwKK3rqtQv88AoTQc5bzUB7yznAB3W19_Z6cY28dDMDN4rPE-dmon3xfWGZDSTY1aV0JD6-NVf0M4W_rpi2_XfIuisPeU7a5vKWT8KRLTH2weNBoxWbtUophO1-vtFPhj7x6xcvdVOZgBmnDzIXS7DCQ4nL0LNDRXgHy_YiEIfQfSQ-7n8ChcHplVrai6Yvvel2jM"/>
+<span class="absolute bottom-1 right-1 bg-surface-container-highest/90 text-on-surface p-0.5 rounded-md flex items-center justify-center" title="জুম করুন">
+<span class="material-symbols-outlined text-[16px]">zoom_in</span>
+</span>
+</div>
+<!-- Header Information -->
+<div class="flex flex-col flex-1 min-w-0 justify-between">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center justify-between gap-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md">
+<span>🍅 টমেটো • Tomato</span>
+</span>
+<span class="font-label-md text-label-md text-on-surface-variant">সকাল ১০:২৪</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface font-bold truncate mt-1">আর্লি ব্লাইট</h3>
+<span class="font-label-md text-label-md text-on-surface-variant truncate">Early Blight • Alternaria solani</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[15px] text-outline">location_on</span>
+<span class="font-label-md text-label-md truncate">ঈশ্বরদী, পাবনা</span>
+</div>
+</div>
+</div>
+<!-- Dual Encoded Confidence & Severity Pill -->
+<div class="flex flex-col gap-1.5 p-space-sm rounded-lg bg-error-container/40">
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-1.5 font-label-lg text-label-lg text-error font-bold">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span>উচ্চ ঝুঁকি • High Risk</span>
+</div>
+<span class="font-label-lg text-label-lg text-error font-bold">৯৪.৫% নিশ্চিত</span>
+</div>
+<!-- Accessible Confidence Progress Bar -->
+<div aria-label="AI সনাক্তকরণ নির্ভরতা ৯৪.৫ শতাংশ" aria-valuemax="100" aria-valuemin="0" aria-valuenow="94.5" class="w-full h-2 rounded-full bg-error-container overflow-hidden" role="progressbar">
+<div class="h-full rounded-full bg-error" style="width: 94.5%;"></div>
+</div>
+</div>
+<!-- Quick Agronomic Recommendation -->
+<div class="flex items-start gap-2 bg-surface-container-low p-space-sm rounded-lg">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">medical_services</span>
+<p class="font-body-md text-body-md text-on-surface leading-snug">
+<strong class="font-bold text-primary">জরুরি সমাধান:</strong> অনুমোদিত ম্যানকোজেব ৭৫% ডব্লিউপি স্প্রে করুন এবং আক্রান্ত পাতা দ্রুত অপসারন করুন।
+        </p>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">cloud_done</span> ক্লাউড সিঙ্কড
+        </span>
+<button aria-label="আর্লি ব্লাইট স্ক্যানের বিস্তারিত রিপোর্ট দেখুন" class="min-h-[48px] px-space-md rounded-xl bg-primary text-on-primary font-label-lg text-label-lg flex items-center gap-1.5 hover:bg-primary-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" type="button">
+<span>বিস্তারিত দেখুন</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Low Confidence / Inconclusive Result (Blurry leaf capture) -->
+<div class="flex flex-col w-full bg-surface-container-lowest rounded-xl shadow-md p-space-md gap-space-sm transition-all hover:shadow-lg">
+<div class="flex gap-space-sm">
+<!-- Thumbnail with alert marker -->
+<div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img alt="ঝাপসা ফোকাসে টমেটো পাতা" class="w-full h-full object-cover filter blur-[1.5px]" src="https://lh3.googleusercontent.com/aida/AEtjO1WofbKvuxO-4gLCnwvplL2PZ01J6ejBvipkbGrmeYYbu5_gzFbzl2fwKK3rqtQv88AoTQc5bzUB7yznAB3W19_Z6cY28dDMDN4rPE-dmon3xfWGZDSTY1aV0JD6-NVf0M4W_rpi2_XfIuisPeU7a5vKWT8KRLTH2weNBoxWbtUophO1-vtFPhj7x6xcvdVOZgBmnDzIXS7DCQ4nL0LNDRXgHy_YiEIfQfSQ-7n8ChcHplVrai6Yvvel2jM"/>
+<div class="absolute inset-0 bg-inverse-surface/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-error-container text-[28px]">motion_blur</span>
+</div>
+<span class="absolute bottom-1 right-1 bg-surface-container-highest/90 text-on-surface p-0.5 rounded-md flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">visibility_off</span>
+</span>
+</div>
+<!-- Header Information -->
+<div class="flex flex-col flex-1 min-w-0 justify-between">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center justify-between gap-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span>🍅 টমেটো • Tomato</span>
+</span>
+<span class="font-label-md text-label-md text-on-surface-variant">সকাল ০৯:১২</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-secondary font-bold leading-tight mt-1">অনিশ্চিত ফলাফল</h3>
+<span class="font-label-md text-label-md text-on-surface-variant truncate">Inconclusive • Low Confidence</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[15px] text-outline">location_on</span>
+<span class="font-label-md text-label-md truncate">ঈশ্বরদী, পাবনা</span>
+</div>
+</div>
+</div>
+<!-- Inconclusive Badge & Confidence Bar -->
+<div class="flex flex-col gap-1.5 p-space-sm rounded-lg bg-secondary-fixed/40">
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-1.5 font-label-lg text-label-lg text-secondary font-bold">
+<span class="material-symbols-outlined text-[18px]">help</span>
+<span>পুনরায় ছবি প্রয়োজন • Retake</span>
+</div>
+<span class="font-label-lg text-label-lg text-secondary font-bold">৪২% (অনিশ্চিত)</span>
+</div>
+<div aria-label="AI নির্ভরতা ৪২ শতাংশ - সিদ্ধান্ত স্থগিত" aria-valuemax="100" aria-valuemin="0" aria-valuenow="42" class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden" role="progressbar">
+<div class="h-full rounded-full bg-secondary-container" style="width: 42%;"></div>
+</div>
+</div>
+<div class="flex items-start gap-2 bg-surface-container-low p-space-sm rounded-lg">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">info</span>
+<p class="font-body-md text-body-md text-on-surface leading-snug">
+          অস্পষ্ট ফোকাস ও ক্যামেরার ছায়ার কারণে এআই নির্দিষ্ট রোগ চিহ্নিত করতে পারেনি। পাতা পরিষ্কার করে পর্যাপ্ত আলোতে পুনরায় স্ক্যান করুন।
+        </p>
+</div>
+<!-- Action Buttons -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button aria-label="টমেটো পাতার সঠিক ছবি তোলার নির্দেশিকা দেখুন" class="min-h-[48px] px-space-sm rounded-xl bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-lg text-label-lg flex items-center justify-center gap-1 focus:outline-none focus:ring-2 focus:ring-primary" type="button">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+<span>টিপস দেখুন</span>
+</button>
+<button aria-label="নতুন করে ছবি তুলুন" class="min-h-[48px] px-space-sm rounded-xl bg-secondary-container text-on-secondary-container hover:opacity-90 transition-opacity font-label-lg text-label-lg font-bold flex items-center justify-center gap-1 focus:outline-none focus:ring-2 focus:ring-secondary shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+<span>পুনরায় তুলুন</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Diagnostic Scan Timeline Group 2: Yesterday -->
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<!-- Date Header Accent -->
+<div class="flex items-center gap-2 py-1">
+<span class="w-2.5 h-2.5 rounded-full bg-outline"></span>
+<h2 class="font-title-lg text-title-lg text-on-surface font-bold">গতকাল • ২৪ অক্টোবর ২০২৪ <span class="font-label-md text-label-md text-on-surface-variant font-normal">(Yesterday)</span></h2>
+</div>
+<!-- Card 3: Moderate Risk (Bacterial Leaf Blight on Rice) -->
+<div class="flex flex-col w-full bg-surface-container-lowest rounded-xl shadow-md p-space-md gap-space-sm transition-all hover:shadow-lg">
+<div class="flex gap-space-sm">
+<!-- Thumbnail -->
+<div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img alt="ধানের পাতায় ব্যাক্টেরিয়াল লিফ ব্লাইট রোগের লম্বাটে দাগ" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UyGcKAvakfgrvekCR5hX-n-pjBbpEHZpw4IScohZ6q0TlUXhHtmRP9TENatb6t_vmOg3o3M4i54lCjePV2GD6RPxHKISJMJgJ5saOUA-a9MhNIXLojSpOzNH_egB4Nevt8YvgYotjZuE0gk5nWOOPeQz5POoSvNQnrseSmoS9IQsiCJchDrgkkW7seNL8NXWs6NmXkKcCEzEdxaMXQcGoPwJncEdoz7kYuD4FyfbXIGnd2OsHAIl4okGI"/>
+<span class="absolute bottom-1 right-1 bg-surface-container-highest/90 text-on-surface p-0.5 rounded-md flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">zoom_in</span>
+</span>
+</div>
+<!-- Header Information -->
+<div class="flex flex-col flex-1 min-w-0 justify-between">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center justify-between gap-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-md text-label-md">
+<span>🌾 ধান • BRRI dhan28</span>
+</span>
+<span class="font-label-md text-label-md text-on-surface-variant">বিকাল ০৩:১৫</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface font-bold truncate mt-1">ব্যাকটেরিয়াল লিফ ব্লাইট</h3>
+<span class="font-label-md text-label-md text-on-surface-variant truncate">Bacterial Leaf Blight • Xanthomonas</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[15px] text-outline">location_on</span>
+<span class="font-label-md text-label-md truncate">শেরপুর, বগুড়া</span>
+</div>
+</div>
+</div>
+<!-- Moderate Risk Badge -->
+<div class="flex flex-col gap-1.5 p-space-sm rounded-lg bg-surface-container-high">
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-1.5 font-label-lg text-label-lg text-secondary font-bold">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>মাঝারি ঝুঁকি • Moderate Risk</span>
+</div>
+<span class="font-label-lg text-label-lg text-secondary font-bold">৮৯.২% নিশ্চিত</span>
+</div>
+<div aria-label="AI নির্ভরতা ৮৯.২ শতাংশ" aria-valuemax="100" aria-valuemin="0" aria-valuenow="89.2" class="w-full h-2 rounded-full bg-surface-container overflow-hidden" role="progressbar">
+<div class="h-full rounded-full bg-secondary-container" style="width: 89.2%;"></div>
+</div>
+</div>
+<!-- Quick Prescription Advice -->
+<div class="flex items-start gap-2 bg-surface-container-low p-space-sm rounded-lg">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">energy_savings_leaf</span>
+<p class="font-body-md text-body-md text-on-surface leading-snug">
+<strong class="font-bold text-primary">ব্যবস্থাপনা:</strong> জমিতে ইউরিয়া সারের উপরিপ্রয়োগ সাময়িক বন্ধ রাখুন। অতিরিক্ত ৬০ গ্রাম পটাশ ও কপার অক্সিক্লোরাইড স্প্রে করুন।
+        </p>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-between pt-1">
+<div class="inline-flex items-center gap-1 text-on-surface-variant text-label-md font-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+<span>প্রেসক্রিপশন সংরক্ষিত</span>
+</div>
+<button aria-label="ব্যাকটেরিয়াল লিফ ব্লাইট স্ক্যানের বিস্তারিত দেখুন" class="min-h-[48px] px-space-md rounded-xl bg-primary text-on-primary font-label-lg text-label-lg flex items-center gap-1.5 hover:bg-primary-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" type="button">
+<span>বিস্তারিত দেখুন</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 4: Safe / Healthy Leaf Diagnosis -->
+<div class="flex flex-col w-full bg-surface-container-lowest rounded-xl shadow-md p-space-md gap-space-sm transition-all hover:shadow-lg">
+<div class="flex gap-space-sm">
+<!-- Thumbnail -->
+<div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high">
+<img alt="ধানের সুস্থ ও সতেজ সবুজ পাতা" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UyGcKAvakfgrvekCR5hX-n-pjBbpEHZpw4IScohZ6q0TlUXhHtmRP9TENatb6t_vmOg3o3M4i54lCjePV2GD6RPxHKISJMJgJ5saOUA-a9MhNIXLojSpOzNH_egB4Nevt8YvgYotjZuE0gk5nWOOPeQz5POoSvNQnrseSmoS9IQsiCJchDrgkkW7seNL8NXWs6NmXkKcCEzEdxaMXQcGoPwJncEdoz7kYuD4FyfbXIGnd2OsHAIl4okGI"/>
+<span class="absolute bottom-1 right-1 bg-surface-container-highest/90 text-on-surface p-0.5 rounded-md flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</span>
+</div>
+<!-- Header Information -->
+<div class="flex flex-col flex-1 min-w-0 justify-between">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center justify-between gap-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md">
+<span>🌾 ধান • Rice</span>
+</span>
+<span class="font-label-md text-label-md text-on-surface-variant">সকাল ০৯:১০</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-primary font-bold truncate mt-1">সুস্থ পাতা • কোনো রোগ নেই</h3>
+<span class="font-label-md text-label-md text-on-surface-variant truncate">Healthy Foliage • Optimal Condition</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[15px] text-outline">location_on</span>
+<span class="font-label-md text-label-md truncate">শেরপুর, বগুড়া</span>
+</div>
+</div>
+</div>
+<!-- Safe / Healthy Badge -->
+<div class="flex flex-col gap-1.5 p-space-sm rounded-lg bg-tertiary-fixed/30">
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-1.5 font-label-lg text-label-lg text-tertiary-container font-bold">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>নিরাপদ • Healthy &amp; Safe</span>
+</div>
+<span class="font-label-lg text-label-lg text-tertiary-container font-bold">৯৭.৮% নিশ্চিত</span>
+</div>
+<div aria-label="AI নির্ভরতা ৯৭.৮ শতাংশ" aria-valuemax="100" aria-valuemin="0" aria-valuenow="97.8" class="w-full h-2 rounded-full bg-surface-container overflow-hidden" role="progressbar">
+<div class="h-full rounded-full bg-tertiary-container" style="width: 97.8%;"></div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-md text-label-md text-on-surface-variant">নিয়মিত সেচ অব্যাহত রাখুন</span>
+<button aria-label="সুস্থ ধান পাতার ইতিহাস দেখুন" class="min-h-[48px] px-space-md rounded-xl bg-surface-container text-primary font-label-lg text-label-lg flex items-center gap-1.5 hover:bg-surface-container-high transition-colors focus:outline-none focus:ring-2 focus:ring-primary" type="button">
+<span>রিপোর্ট দেখুন</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Diagnostic Scan Timeline Group 3: Earlier Scans -->
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<!-- Date Header -->
+<div class="flex items-center gap-2 py-1">
+<span class="w-2.5 h-2.5 rounded-full bg-outline-variant"></span>
+<h2 class="font-title-lg text-title-lg text-on-surface font-bold">২১ অক্টোবর ২০২৪ <span class="font-label-md text-label-md text-on-surface-variant font-normal">(Earlier)</span></h2>
+</div>
+<!-- Card 5: Low-Light Uncertain Scan on Potato -->
+<div class="flex flex-col w-full bg-surface-container-lowest rounded-xl shadow-md p-space-md gap-space-sm">
+<div class="flex gap-space-sm">
+<div class="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-inverse-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-surface-container text-[36px]">wb_twilight</span>
+<span class="absolute bottom-1 right-1 bg-surface-container-highest text-on-surface p-0.5 rounded-md flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">dark_mode</span>
+</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0 justify-between">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center justify-between gap-1">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md">
+<span>🥔 আলু • Potato</span>
+</span>
+<span class="font-label-md text-label-md text-on-surface-variant">সন্ধ্যা ০৬:১০</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-secondary font-bold truncate mt-1">অপর্যাপ্ত আলো</h3>
+<span class="font-label-md text-label-md text-on-surface-variant truncate">Insufficient Light • Undetected</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[15px] text-outline">location_on</span>
+<span class="font-label-md text-label-md truncate">শিবগঞ্জ, বগুড়া</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-secondary-fixed/40">
+<div class="inline-flex items-center gap-1.5 font-label-lg text-label-lg text-secondary font-bold">
+<span class="material-symbols-outlined text-[18px]">error</span>
+<span>পুনরায় পরীক্ষা আবশ্যক</span>
+</div>
+<span class="font-label-lg text-label-lg text-secondary font-bold">৩৮% (অসম্পূর্ণ)</span>
+</div>
+<div class="flex items-center justify-end gap-2 pt-1">
+<button aria-label="আলু পাতার পুনরায় ছবি তুলুন" class="min-h-[48px] px-space-md rounded-xl bg-primary text-on-primary font-label-lg text-label-lg flex items-center gap-1.5 hover:bg-primary-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span>পুনরায় স্ক্যান করুন</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom Agronomist Helpline & Advisory Assist Card -->
+<div class="flex flex-col w-full bg-surface-container rounded-2xl p-space-md gap-space-sm shadow-sm mb-2">
+<div class="flex items-start gap-space-sm">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[26px]">support_agent</span>
+</div>
+<div class="flex flex-col flex-1">
+<h4 class="font-title-lg text-title-lg text-primary font-bold">কৃষি কর্মকর্তার সরাসরি পরামর্শ চান?</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5 leading-relaxed">
+          কোনো স্ক্যানের ফলাফল নিয়ে সন্দেহ থাকলে বা সঠিক ওষুধ নির্ধারণে সমস্যা হলে উপজেলা উপসহকারী কৃষি কর্মকর্তার সাথে যোগাযোগ করুন।
+        </p>
+</div>
+</div>
+<!-- Call to Action Hotline Buttons -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+<a aria-label="কৃষি কল সেন্টার ১৬১২৩ নম্বরে বিনামূল্যে কল করুন" class="min-h-[52px] px-space-md rounded-xl bg-primary text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 hover:bg-primary-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" href="tel:16123">
+<span class="material-symbols-outlined text-[22px]">phone_in_talk</span>
+<span>কৃষি কল সেন্টার (১৬১২৩)</span>
+</a>
+<button aria-label="নিকটস্থ কৃষি কর্মকর্তার সাথে চ্যাট শুরু করুন" class="min-h-[52px] px-space-md rounded-xl bg-surface-container-lowest text-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors focus:outline-none focus:ring-2 focus:ring-primary" type="button">
+<span class="material-symbols-outlined text-[22px]">forum</span>
+<span>কর্মকর্তার সাথে চ্যাট</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Simple interactive micro-interaction for active filter chips
+  document.querySelectorAll('[role="toolbar"] button').forEach(button => {
+    button.addEventListener('click', function() {
+      document.querySelectorAll('[role="toolbar"] button').forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-on-primary');
+        btn.classList.add('bg-surface-container', 'text-on-surface');
+      });
+      this.classList.remove('bg-surface-container', 'text-on-surface');
+      this.classList.add('bg-primary', 'text-on-primary');
+    });
+  });
+</script></main><nav aria-label="Main Navigation" class="fixed bottom-0 w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.06)]" data-active-classes="text-primary font-bold"><div class="flex items-center justify-around h-20 px-space-xs"><a aria-label="হোম" class="min-h-[52px] min-w-[56px] flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-lg" data-path="home-dashboard" href="#"><span aria-hidden="true" class="material-symbols-outlined text-[24px]">home</span><span class="font-label-md text-label-md leading-none">হোম</span></a><div class="relative flex items-center justify-center -mt-5"><a aria-label="রোগ নির্ণয় ও স্ক্যান" class="min-h-[56px] px-space-md py-space-xs rounded-full bg-primary-container text-on-primary shadow-lg shadow-primary/25 flex items-center gap-2 hover:bg-primary transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" data-path="crop-scanner" href="#"><span aria-hidden="true" class="material-symbols-outlined text-[28px]">document_scanner</span><span class="font-label-lg text-label-lg font-bold pr-1">পরীক্ষা</span></a></div><a aria-label="হিস্ট্রি" class="min-h-[56px] px-space-md py-space-xs rounded-full bg-primary-container text-on-primary shadow-lg shadow-primary/25 flex items-center gap-2 hover:bg-primary transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" data-path="diagnostic-history" href="#"><span aria-hidden="true" class="material-symbols-outlined text-[24px]">history</span><span class="font-label-lg text-label-lg font-bold leading-none">হিস্ট্রি</span></a><a aria-label="প্রোফাইল" class="min-h-[52px] min-w-[56px] flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-lg" data-path="user-profile" href="#"><span aria-hidden="true" class="material-symbols-outlined text-[24px]">person</span><span class="font-label-md text-label-md leading-none">প্রোফাইল</span></a></div></nav></body></html>

@@ -1,0 +1,8 @@
+{
+    "num_classes": 94,
+    "test_samples": 12423,
+    "test_accuracy": 0.8860983659341544,
+    "test_accuracy_percent": 88.60983659341544,
+    "macro_f1": 0.8551547871714311,
+    "weighted_f1": 0.8852103017363352
+}

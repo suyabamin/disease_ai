@@ -1,0 +1,31 @@
+﻿# Python
+backend/.venv/
+backend/.vercel/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Environment
+.env
+.env.*
+
+# Dataset
+*.zip
+*.zip.kaggle-partial
+*.rar
+*.7z
+
+# Node
+node_modules/
+dist/
+
+# IDE
+.vscode/
+.idea/
+
+# Python cache
+.pytest_cache/
+.mypy_cache/
+
+# Kilo
+.kilo/

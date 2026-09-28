@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+<html lang="bn"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>AgroAI Bangladesh</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&amp;family=Noto+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#faf8ff;color:#131b2e;-webkit-tap-highlight-color:transparent;}body{overscroll-behavior-y:none;font-family:'Noto Sans Bengali','Noto Sans',sans-serif;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-tint": "#2a6b2c", "on-error": "#ffffff", "surface-bright": "#faf8ff", "surface-variant": "#dae2fd", "on-tertiary-container": "#78da8b", "tertiary-fixed-dim": "#79db8d", "on-tertiary-fixed-variant": "#005323", "on-tertiary-fixed": "#00210a", "on-surface": "#131b2e", "surface-container-high": "#e2e7ff", "outline-variant": "#c0c9bb", "tertiary-fixed": "#95f8a7", "surface-dim": "#d2d9f4", "surface-container-highest": "#dae2fd", "on-secondary-fixed": "#331200", "primary-fixed-dim": "#91d78a", "on-secondary-container": "#682c00", "surface": "#faf8ff", "outline": "#717a6d", "on-background": "#131b2e", "primary-container": "#1b5e20", "secondary-fixed": "#ffdbca", "on-primary-fixed": "#002203", "inverse-surface": "#283044", "inverse-on-surface": "#eef0ff", "error-container": "#ffdad6", "on-primary-container": "#90d689", "error": "#ba1a1a", "secondary-container": "#fd8a42", "surface-container-low": "#f2f3ff", "secondary": "#9b4500", "on-tertiary": "#ffffff", "tertiary-container": "#005f29", "on-primary": "#ffffff", "surface-container": "#eaedff", "secondary-fixed-dim": "#ffb68e", "primary-fixed": "#acf4a4", "on-secondary": "#ffffff", "tertiary": "#00451c", "inverse-primary": "#91d78a", "on-error-container": "#93000a", "on-secondary-fixed-variant": "#763300", "background": "#faf8ff", "on-surface-variant": "#41493e", "primary": "#00450d", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#0c5216" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-md": "1rem", "margin-desktop": "2rem", "space-lg": "1.5rem", "gutter": "1rem", "space-xl": "2rem", "space-xs": "0.25rem", "margin": "1rem", "space-sm": "0.5rem", "gutter-desktop": "1.5rem" }, fontFamily: { "body-md": ["Noto Sans"], "body-lg": ["Noto Sans"], "title-lg": ["Noto Sans"], "label-lg": ["Noto Sans"], "headline-xl": ["Noto Sans"], "body-bold": ["Noto Sans"], "headline-lg-mobile": ["Noto Sans"], "headline-xl-mobile": ["Noto Sans"], "headline-lg": ["Noto Sans"], "label-md": ["Noto Sans"], "headline-md": ["Noto Sans"] }, fontSize: { "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }], "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }], "title-lg": ["18px", { lineHeight: "26px", fontWeight: "600" }], "label-lg": ["15px", { lineHeight: "20px", fontWeight: "600" }], "headline-xl": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }], "body-bold": ["16px", { lineHeight: "24px", fontWeight: "600" }], "headline-lg-mobile": ["22px", { lineHeight: "30px", fontWeight: "700" }], "headline-xl-mobile": ["26px", { lineHeight: "34px", letterSpacing: "-0.01em", fontWeight: "700" }], "headline-lg": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-md": ["13px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "600" }], "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-24 px-margin flex flex-col justify-center gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="AgroAI Bangladesh Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UuiAhrUJ1g4R_c9tgW_lt3EScDCYp_C5sOX0vYwct8DO0umHlESKF6GpNw7bG1s-_jY1rb-4-KvLbkJhkf5ir61xStZmjtudKS8k00ziJFTiFNOuJ3kGIVka17QdBPUYD6tM7ifmIwSqJXICmqy3RoPU7pkRpV-oZcvWzQZLhop_4AVX_thD5PavH_cNOv8tnRZG41CPnzbfef4dhTcOT7tPxgLXxah40NQiixIpCUdoY-QWmy6pidhEk"/><div class="flex flex-col"><span class="font-label-lg text-label-lg text-primary leading-tight font-bold">AgroAI</span><span class="font-label-md text-label-md text-on-surface-variant font-medium leading-none">হিস্ট্রি (Diagnostic History)</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Change Language to Bengali or English" class="min-h-[44px] min-w-[44px] px-space-sm py-space-xs flex items-center justify-center rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" type="button"><span class="font-label-md text-label-md font-bold text-primary">বাংলা</span><span class="font-label-md text-label-md mx-0.5 text-outline">|</span><span class="font-label-md text-label-md font-medium text-on-surface-variant">EN</span></button><button aria-label="User Profile" class="min-h-[44px] min-w-[44px] p-0.5 flex items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-primary" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvnzK7UjoSeXsT9OOH3XWipjnFQCT3eL7sTTSlkxnzvPpkZ1ODBU9JNwzpIRFm3jzEC8E_lyB1zZUOVYqOejjAyXPW_zGJ-hSlSdsgYXeITvOucE6njsq8X_IgAtfFKFaAwqKy0KAOUGNNhv9mfscHs8WCR5liQCo0dB3oBiftUAfERG_3dqCml-7iz1Qn_KdUjw6oP9N5myxgIgrMrSFwXKkMIAGc4SPR5UU2cBt9fHAzLBstKcvZ"/></button></div></div><div class="flex items-center justify-between"><div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md"><span aria-hidden="true" class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span><span class="font-medium">অনলাইন • Online</span></div><div class="text-outline text-label-md font-label-md flex items-center gap-1"><span aria-hidden="true" class="material-symbols-outlined text-[16px]">network_wifi</span><span>4G High</span></div></div></div></header><main class="flex flex-col relative w-full pt-24 pb-28 bg-surface px-margin min-h-screen"><div class="flex flex-col w-full gap-space-md">
+<!-- Top Action & Navigation Strip -->
+<div class="flex items-center justify-between gap-space-sm pt-space-xs">
+<a aria-label="পূর্ববর্তী পাতায় ফিরুন / Back to scan history" class="min-h-[48px] px-space-md py-space-xs flex items-center gap-space-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" href="#">
+<span class="material-symbols-outlined text-[20px] text-primary">arrow_back</span>
+<span class="font-label-lg text-label-lg font-bold text-primary">হিস্ট্রি</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">/ Back</span>
+</a>
+<div class="flex items-center gap-space-xs">
+<button aria-label="পিডিএফ রিপোর্ট ডাউনলোড করুন (Download PDF)" class="min-h-[48px] min-w-[48px] flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" type="button">
+<span class="material-symbols-outlined text-[22px] text-on-surface-variant">picture_as_pdf</span>
+</button>
+<button aria-label="রিপোর্ট শেয়ার করুন (Share scan report)" class="min-h-[48px] min-w-[48px] flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" type="button">
+<span class="material-symbols-outlined text-[22px] text-on-surface-variant">share</span>
+</button>
+</div>
+</div>
+<!-- Record Identity & Timestamp Badge -->
+<div class="flex flex-col gap-1 px-1">
+<div class="flex items-center justify-between flex-wrap gap-2">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">শনাক্তকরণ ফলাফল</span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md font-bold tracking-wide">
+<span class="material-symbols-outlined text-[16px] text-primary">tag</span>
+        AG-88294
+      </span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md flex-wrap">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">calendar_today</span>
+        ২৫ অক্টোবর ২০২৪ • সকাল ১০:২৪
+      </span>
+<span>•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">location_on</span>
+        ঈশ্বরদী, পাবনা
+      </span>
+</div>
+</div>
+<!-- Diagnostic Hero Card -->
+<div class="w-full rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-md">
+<!-- Crop & Status Header -->
+<div class="flex items-start justify-between gap-space-sm flex-wrap">
+<div class="flex flex-col gap-0.5">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-md text-label-md w-fit">
+<span class="text-[16px]">🍅</span>
+<span class="font-bold text-primary">টমেটো (Tomato)</span>
+<span class="text-outline">|</span>
+<span class="text-on-surface-variant">বারি টমেটো-৮</span>
+</div>
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile text-on-surface mt-1 font-bold">আর্লি ব্লাইট (Early Blight)</h1>
+<p class="font-label-md text-label-md text-on-surface-variant italic">ছত্রাকজনিত: Alternaria solani</p>
+</div>
+<!-- High Risk Badge with Dual Encoding -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-error-container text-on-error-container font-label-lg text-label-lg font-bold shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span>উচ্চ ঝুঁকি • High Risk</span>
+</div>
+</div>
+<!-- AI Confidence Meter -->
+<div class="flex flex-col gap-1.5 p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="flex items-center gap-1 text-on-surface font-bold">
+<span class="material-symbols-outlined text-[18px] text-primary">psychology</span>
+          এআই আত্মবিশ্বাস মাত্রা (Model Accuracy)
+        </span>
+<span class="font-headline-md text-headline-md text-error font-bold">৯৪.৫% নিশ্চিত</span>
+</div>
+<div class="w-full h-3 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full bg-error rounded-full transition-all duration-500" style="width: 94.5%;"></div>
+</div>
+<div class="flex items-center justify-between text-outline font-label-md text-label-md text-[11px] pt-0.5">
+<span>০% সাধারণ সতর্কতা</span>
+<span>৫০% মধ্যম সন্দেহ</span>
+<span class="text-error font-bold">৯৪.৫% সুনিশ্চিত প্রাদুর্ভাব</span>
+</div>
+</div>
+<!-- Audio Diagnosis Narration Player -->
+<div class="flex items-center justify-between gap-space-sm p-space-sm rounded-lg bg-tertiary-fixed text-on-tertiary-fixed">
+<div class="flex items-center gap-space-sm min-w-0">
+<button aria-label="বাংলায় অডিও পরামর্শ শুনুন" class="min-h-[48px] min-w-[48px] rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center shadow-md focus:outline-none focus:ring-2 focus:ring-primary" id="voiceBtn" type="button">
+<span class="material-symbols-outlined text-[24px]" id="voiceIcon">volume_up</span>
+</button>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold leading-snug truncate">ভয়েস নির্দেশনা শুনুন</span>
+<span class="font-label-md text-label-md text-on-tertiary-fixed-variant truncate">সহজ বাংলায় রোগের প্রতিকার ও স্প্রে নিয়ম</span>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-tertiary-fixed-variant font-bold shrink-0">০১:১৫ মি.</span>
+</div>
+</div>
+<!-- Primary Photographic Evidence & Interactive Inspection -->
+<div class="w-full rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px] text-primary">camera</span>
+<span class="font-title-lg text-title-lg text-on-surface">আক্রান্ত পাতার মূল স্ক্যান ছবি</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md font-bold">
+        মূল ফিল্ড ছবি
+      </span>
+</div>
+<!-- Image Viewport with Contextual Markers -->
+<div class="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-container-high shadow-inner">
+<img alt="Close-up of tomato plant leaf showing early blight concentric dark brown spots with chlorotic yellow halo rings" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WofbKvuxO-4gLCnwvplL2PZ01J6ejBvipkbGrmeYYbu5_gzFbzl2fwKK3rqtQv88AoTQc5bzUB7yznAB3W19_Z6cY28dDMDN4rPE-dmon3xfWGZDSTY1aV0JD6-NVf0M4W_rpi2_XfIuisPeU7a5vKWT8KRLTH2weNBoxWbtUophO1-vtFPhj7x6xcvdVOZgBmnDzIXS7DCQ4nL0LNDRXgHy_YiEIfQfSQ-7n8ChcHplVrai6Yvvel2jM"/>
+<!-- Marker 1: Target concentric rings -->
+<div class="absolute top-[35%] left-[38%] -translate-x-1/2 -translate-y-1/2 group">
+<button aria-label="দাগ লক্ষণ ১: ঘন বলয়যুক্ত বাদামী দাগ" class="min-h-[48px] min-w-[48px] flex items-center justify-center" type="button">
+<span class="relative flex h-8 w-8">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"></span>
+<span class="relative inline-flex rounded-full h-8 w-8 bg-error text-on-error items-center justify-center font-bold text-[12px] shadow-md">১</span>
+</span>
+</button>
+<div class="absolute top-10 left-1/2 -translate-x-1/2 pointer-events-none px-2 py-1 rounded bg-inverse-surface text-inverse-on-surface font-label-md text-label-md whitespace-nowrap shadow-md">
+          গাঢ় বলয়যুক্ত দাগ (Target Rings)
+        </div>
+</div>
+<!-- Marker 2: Chlorotic Yellow Halo -->
+<div class="absolute top-[65%] left-[40%] -translate-x-1/2 -translate-y-1/2 group">
+<button aria-label="লক্ষণ ২: হলুদ ক্লোরোটিক বলয়" class="min-h-[48px] min-w-[48px] flex items-center justify-center" type="button">
+<span class="relative flex h-8 w-8">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-8 w-8 bg-secondary text-on-secondary items-center justify-center font-bold text-[12px] shadow-md">২</span>
+</span>
+</button>
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 pointer-events-none px-2 py-1 rounded bg-inverse-surface text-inverse-on-surface font-label-md text-label-md whitespace-nowrap shadow-md">
+          হলুদ আভা (Chlorotic Halo)
+        </div>
+</div>
+<!-- Camera Hardware & Capture Environmental Metadata Pill -->
+<div class="absolute bottom-2 left-2 right-2 p-2 rounded-lg bg-inverse-surface/85 backdrop-blur-md text-inverse-on-surface flex items-center justify-between font-label-md text-label-md">
+<span class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">smartphone</span>
+          Samsung Galaxy A14 • স্পষ্ট দিনের আলো
+        </span>
+<span class="shrink-0 text-outline-variant font-mono">F/2.2 • ISO 100</span>
+</div>
+</div>
+<!-- Image Action Buttons -->
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<button class="min-h-[48px] px-space-sm py-space-xs rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center gap-1.5 font-label-lg text-label-lg font-bold transition-all focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px] text-primary">zoom_in</span>
+<span>জুম ছবি দেখুন</span>
+</button>
+<button class="min-h-[48px] px-space-sm py-space-xs rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center gap-1.5 font-label-lg text-label-lg font-bold transition-all focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px] text-secondary">compare</span>
+<span>সুস্থ পাতার তুলনা</span>
+</button>
+</div>
+</div>
+<!-- Detailed AI Symptom Breakdown Section -->
+<div class="w-full rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px] text-primary">biotech</span>
+<h2 class="font-title-lg text-title-lg text-on-surface">কেন এই ফলাফল? (লক্ষণ বিশ্লেষণ)</h2>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">৩টি লক্ষণ চিহ্নিত</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<!-- Item 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-error text-on-error flex items-center justify-center font-bold text-[12px]">১</span>
+<span class="font-body-bold text-body-bold text-on-surface">ঘন বলয়যুক্ত বাদামী দাগ (Target Rings)</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-bold">৯৬% মিল</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant pl-8">
+          পাতার কেন্দ্রে কাঠের বৃত্তাকার বা কনসেন্ট্রিক রিং-এর মতো পচা বাদামী দাগ স্পষ্টভাবে দৃশ্যমান।
+        </p>
+</div>
+<!-- Item 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-[12px]">২</span>
+<span class="font-body-bold text-body-bold text-on-surface">হলুদ আভা বা ক্লোরোসিস বলয় (Yellow Halo)</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md font-bold">৯২% মিল</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant pl-8">
+          ক্ষতিগ্রস্ত দাগের চারধারে টিস্যুর মৃত্যু রোধকারী ক্লোরোফিল ধ্বংসের ফলে হলুদ বর্ণ বলয় তৈরি হয়েছে।
+        </p>
+</div>
+<!-- Item 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-[12px]">৩</span>
+<span class="font-body-bold text-body-bold text-on-surface">নিচের বয়স্ক পাতা থেকে সংক্রমন</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-primary font-label-md text-label-md font-bold">৯৪% মিল</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant pl-8">
+          মাটির সংলগ্ন পুরাতন ডাল ও পাতার অগ্রভাগে প্রাথমিক ছত্রাক স্পোর ঘনীভূত হয়ে দ্রুত ছড়াচ্ছে।
+        </p>
+</div>
+</div>
+</div>
+<!-- Prescribed Treatment & Medication Cards (Tabs/Segmented Switcher) -->
+<div class="w-full rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[24px] text-primary">prescriptions</span>
+<h2 class="font-title-lg text-title-lg text-on-surface">প্রতিকার ও ঔষধ প্রেসক্রিপশন</h2>
+</div>
+<span class="inline-flex items-center gap-1 font-label-md text-label-md text-tertiary-container font-bold">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+        DAE পরীক্ষিত
+      </span>
+</div>
+<!-- Segmented Tab Toggle -->
+<div class="grid grid-cols-2 gap-1 p-1 bg-surface-container rounded-xl">
+<button class="min-h-[44px] rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary" id="tabChem" type="button">
+<span class="material-symbols-outlined text-[18px]">sanitizer</span>
+<span>রাসায়নিক সমাধান</span>
+</button>
+<button class="min-h-[44px] rounded-lg text-on-surface-variant font-label-lg text-label-lg font-bold flex items-center justify-center gap-1.5 hover:text-on-surface transition-all focus:outline-none focus:ring-2 focus:ring-primary" id="tabOrg" type="button">
+<span class="material-symbols-outlined text-[18px]">eco</span>
+<span>জৈব ও প্রাকৃতিক</span>
+</button>
+</div>
+<!-- Content: Chemical Remedies -->
+<div class="flex flex-col gap-space-sm" id="chemContent">
+<!-- Primary Medicine Card -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">প্রথম পছন্দ (Primary Medicine)</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold">ম্যানকোজেব ৭৫% ডব্লিউপি</span>
+<span class="font-label-md text-label-md text-on-surface-variant">(Mancozeb 75% WP)</span>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md font-bold">
+            ছত্রাকনাশক
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="p-2 rounded bg-surface-container-lowest">
+<span class="font-label-md text-label-md text-outline block">বাজারের নাম (Brand Examples)</span>
+<span class="font-body-bold text-body-bold text-on-surface">ডাইথেন এম-৪৫, ইন্ডোফিল</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest">
+<span class="font-label-md text-label-md text-outline block">প্রয়োগ মাত্রা (Dosage)</span>
+<span class="font-body-bold text-body-bold text-primary">২ গ্রাম / লিটার পানিতে</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-2 rounded bg-surface-container-high text-on-surface font-label-md text-label-md mt-1">
+<span class="material-symbols-outlined text-[18px] text-primary">repeat</span>
+<span>প্রয়োগের সময়সূচি: আক্রান্ত গাছে ৭ দিন পরপর ২-৩ বার ভালোভাবে স্প্রে করুন।</span>
+</div>
+</div>
+<!-- Alternative Medicine Card -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-secondary font-bold">বিকল্প সমাধান (Alternative Option)</span>
+<span class="font-label-md text-label-md text-on-surface-variant">তীব্র সংক্রমণের ক্ষেত্রে</span>
+</div>
+<div class="flex items-center justify-between flex-wrap gap-2">
+<div>
+<span class="font-body-bold text-body-bold text-on-surface block">ডিফেনোকোনাজল ২৫% ইসি (Score 250 EC)</span>
+<span class="font-label-md text-label-md text-outline">মাত্রা: ০.৫ মিলি প্রতি লিটার পানিতে (৫ মিলি প্রতি ১০ লিটারে)</span>
+</div>
+<span class="font-label-md text-label-md font-bold text-on-surface bg-surface-container-lowest px-2.5 py-1 rounded-full">
+            ১০ দিন অন্তর
+          </span>
+</div>
+</div>
+</div>
+<!-- Content: Organic / Cultural Remedies (Hidden by default, toggled via JS) -->
+<div class="hidden flex-col gap-space-sm" id="orgContent">
+<div class="p-space-md rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex flex-col gap-2">
+<span class="font-label-md text-label-md font-bold text-on-tertiary-fixed-variant">জৈব ছত্রাকদমন ব্যবস্থা</span>
+<span class="font-body-bold text-body-bold text-on-surface">ট্রাইকোডার্মা ভিরিডি (Trichoderma viride) স্প্রে</span>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          প্রতি লিটার পানিতে ৫ গ্রাম ট্রাইকো-পাউডার মিশিয়ে বিকেলে পাতার নিচে ও গাছের গোড়ায় মাটির ওপর ভালো করে স্প্রে করুন।
+        </p>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-2">
+<span class="font-label-md text-label-md font-bold text-primary">পরিচর্যা ও কৃষি কৌশল</span>
+<ul class="flex flex-col gap-1.5 font-body-md text-body-md text-on-surface">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span>নিচের আক্রান্ত পাতাগুলো কাঁচি দিয়ে সাবধানে কেটে মাটির গভীরে পুঁতে ধ্বংস করুন।</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span>গাছের গোড়ায় খড়কুটো বিছিয়ে (মালচিং) মাটি থেকে পানির ছিটা পাতায় লাগা বন্ধ করুন।</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">check_circle</span>
+<span>অতিরিক্ত নাইট্রোজেন/ইউরিয়া সার প্রয়োগ স্থগিত রেখে পটাশ সার ব্যবহার বৃদ্ধি করুন।</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Safety Warning Disclaimer for Field Spray -->
+<div class="flex items-start gap-2.5 p-space-sm rounded-lg bg-surface-container text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px] text-secondary shrink-0">masks</span>
+<span>সতর্কতা: স্প্রে করার সময় মুখে মাস্ক ও হাতে গ্লাভস পরিধান করুন। ফসল তোলার কমপক্ষে ৭ দিন আগে কোনো রাসায়নিক স্প্রে করবেন না।</span>
+</div>
+</div>
+<!-- Treatment Timeline & Farm Action Plan (ব্যবস্থাপনা সময়সূচি) -->
+<div class="w-full rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px] text-primary">schedule</span>
+<h2 class="font-title-lg text-title-lg text-on-surface">ব্যবস্থাপনা সময়সূচি (Action Plan)</h2>
+</div>
+<span class="font-label-md text-label-md text-primary font-bold">৭ দিনের রুটিন</span>
+</div>
+<div class="flex flex-col gap-space-sm pt-space-xs relative">
+<!-- Step 1 -->
+<div class="flex gap-space-sm items-start">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-error text-on-error flex items-center justify-center font-bold text-label-md text-label-md shadow-sm">
+            ১
+          </div>
+<div class="w-0.5 h-12 bg-surface-container-high my-1"></div>
+</div>
+<div class="flex flex-col gap-0.5 flex-1 p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center justify-between">
+<span class="font-body-bold text-body-bold text-error">দিন ০১ • জরুরি পদক্ষেপ</span>
+<span class="font-label-md text-label-md text-outline">আজই করণীয়</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">আক্রান্ত দাগযুক্ত পাতাগুলো পরিষ্কার কাঁচি দিয়ে কেটে পলিথিনে ভরে মাটির নিচে পুঁতে ফেলুন।</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex gap-space-sm items-start">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-label-md text-label-md shadow-sm">
+            ২
+          </div>
+<div class="w-0.5 h-12 bg-surface-container-high my-1"></div>
+</div>
+<div class="flex flex-col gap-0.5 flex-1 p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center justify-between">
+<span class="font-body-bold text-body-bold text-primary">দিন ০২ • ঔষধ স্প্রে</span>
+<span class="font-label-md text-label-md text-outline">সকাল ৮-১০টা</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">মেঘমুক্ত পরিষ্কার আবহাওয়ায় ম্যানকোজেব (২ গ্রাম/লিটার) পুরো গাছে কুয়াশার মতো স্প্রে করুন।</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex gap-space-sm items-start">
+<div class="flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-bold text-label-md text-label-md shadow-sm">
+            ৩
+          </div>
+</div>
+<div class="flex flex-col gap-0.5 flex-1 p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center justify-between">
+<span class="font-body-bold text-body-bold text-tertiary">দিন ০৭ • ফলো-আপ স্ক্যান</span>
+<span class="font-label-md text-label-md text-outline">পুনর্বিবেচনা</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">নতুন ডগায় দাগ ছড়িয়েছে কিনা দেখতে পুনরায় AgroAI দিয়ে ফলো-আপ স্ক্যান করুন।</p>
+</div>
+</div>
+</div>
+</div>
+<!-- SAAO / Expert Consultation Action Card -->
+<div class="w-full rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-title-lg text-title-lg text-on-surface">কৃষি বিশেষজ্ঞ বা কর্মকর্তার সাথে যোগাযোগ</span>
+<span class="font-label-md text-label-md text-on-surface-variant">পাবনা ঈশ্বরদী উপজেলার দায়িত্বরত কৃষি কর্মকর্তা</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">support_agent</span>
+</div>
+</div>
+<!-- Quick Call Center CTA -->
+<a class="min-h-[52px] w-full px-space-md py-space-xs rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-between hover:bg-primary transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-primary" href="tel:16123">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[22px]">call</span>
+<span>কৃষি কল সেন্টার (১৬১২৩ - টোল ফ্রি)</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-lowest text-primary font-bold font-label-md text-label-md">
+        সরাসরি কথা বলুন
+      </span>
+</a>
+<!-- SAAO and Chat Grid -->
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="min-h-[48px] px-space-sm py-space-xs rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center gap-2 font-label-lg text-label-lg font-bold transition-all focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px] text-primary">person_pin_circle</span>
+<span>উপজেলা SAAO</span>
+</button>
+<button class="min-h-[48px] px-space-sm py-space-xs rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center gap-2 font-label-lg text-label-lg font-bold transition-all focus:outline-none focus:ring-2 focus:ring-primary shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px] text-tertiary">chat</span>
+<span>বিশেষজ্ঞ চ্যাট</span>
+</button>
+</div>
+<!-- Repeat Scan CTA Button -->
+<button class="min-h-[52px] w-full px-space-md py-space-xs rounded-xl bg-secondary-container text-on-secondary-container font-label-lg text-label-lg font-bold flex items-center justify-center gap-2 hover:opacity-95 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary mt-1" type="button">
+<span class="material-symbols-outlined text-[22px]">cached</span>
+<span>এই ফসলের অগ্রগতি আবার স্ক্যান করুন (Follow-up Scan)</span>
+</button>
+</div>
+<!-- Bottom Archival Utilities & Log Management -->
+<div class="w-full flex items-center justify-between p-space-sm rounded-xl bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span>কৃষি সম্প্রসারণ অধিদপ্তর (DAE) ডাটাবেজে সংরক্ষিত</span>
+</div>
+<!-- Safe Delete Record Action -->
+<button aria-label="রেকর্ডটি হিস্ট্রি থেকে মুছে ফেলুন" class="min-h-[48px] px-3 py-1 flex items-center gap-1 text-error hover:bg-error-container/50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-error" id="deleteLogBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+<span class="font-bold">মুছে ফেলুন</span>
+</button>
+</div>
+<!-- Delete Modal Backdrop & Dialog (Hidden initially) -->
+<div class="hidden fixed inset-0 z-50 bg-inverse-surface/50 backdrop-blur-sm flex items-center justify-center p-space-md" id="deleteModal">
+<div class="w-full max-w-sm rounded-2xl bg-surface-container-lowest p-space-lg shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-error-container text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px]">delete_forever</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-lg text-title-lg text-on-surface">রেকর্ড মুছে ফেলতে চান?</span>
+<span class="font-label-md text-label-md text-outline">আইডি: #AG-88294</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        এই ফসলের হিস্ট্রি ও প্রেসক্রিপশন মুছে ফেললে তা আর পুনরুদ্ধার করা যাবে না। আপনি কি নিশ্চিত?
+      </p>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="min-h-[48px] px-space-md rounded-xl bg-surface-container text-on-surface font-label-lg text-label-lg font-bold focus:outline-none" id="cancelDeleteBtn" type="button">
+          না, রাখুন
+        </button>
+<button class="min-h-[48px] px-space-md rounded-xl bg-error text-on-error font-label-lg text-label-lg font-bold shadow-md focus:outline-none" id="confirmDeleteBtn" type="button">
+          হ্যাঁ, মুছুন
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function initDetectionDetails() {
+    // Audio narration toggle state
+    const voiceBtn = document.getElementById('voiceBtn');
+    const voiceIcon = document.getElementById('voiceIcon');
+    let isPlaying = false;
+
+    if (voiceBtn && voiceIcon) {
+      voiceBtn.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          voiceIcon.textContent = 'pause';
+          voiceBtn.setAttribute('aria-label', 'অডিও বিরতি দিন');
+        } else {
+          voiceIcon.textContent = 'volume_up';
+          voiceBtn.setAttribute('aria-label', 'বাংলায় অডিও পরামর্শ শুনুন');
+        }
+      });
+    }
+
+    // Segmented tab toggle for Chemical vs Organic Remedies
+    const tabChem = document.getElementById('tabChem');
+    const tabOrg = document.getElementById('tabOrg');
+    const chemContent = document.getElementById('chemContent');
+    const orgContent = document.getElementById('orgContent');
+
+    if (tabChem && tabOrg && chemContent && orgContent) {
+      tabChem.addEventListener('click', () => {
+        tabChem.className = 'min-h-[44px] rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary';
+        tabOrg.className = 'min-h-[44px] rounded-lg text-on-surface-variant font-label-lg text-label-lg font-bold flex items-center justify-center gap-1.5 hover:text-on-surface transition-all focus:outline-none focus:ring-2 focus:ring-primary';
+        chemContent.classList.remove('hidden');
+        chemContent.classList.add('flex');
+        orgContent.classList.add('hidden');
+        orgContent.classList.remove('flex');
+      });
+
+      tabOrg.addEventListener('click', () => {
+        tabOrg.className = 'min-h-[44px] rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg font-bold flex items-center justify-center gap-1.5 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary';
+        tabChem.className = 'min-h-[44px] rounded-lg text-on-surface-variant font-label-lg text-label-lg font-bold flex items-center justify-center gap-1.5 hover:text-on-surface transition-all focus:outline-none focus:ring-2 focus:ring-primary';
+        orgContent.classList.remove('hidden');
+        orgContent.classList.add('flex');
+        chemContent.classList.add('hidden');
+        chemContent.classList.remove('flex');
+      });
+    }
+
+    // Modal confirmation interaction
+    const deleteLogBtn = document.getElementById('deleteLogBtn');
+    const deleteModal = document.getElementById('deleteModal');
+    const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+    if (deleteLogBtn && deleteModal && cancelDeleteBtn) {
+      deleteLogBtn.addEventListener('click', () => {
+        deleteModal.classList.remove('hidden');
+      });
+
+      cancelDeleteBtn.addEventListener('click', () => {
+        deleteModal.classList.add('hidden');
+      });
+
+      if (confirmDeleteBtn) {
+        confirmDeleteBtn.addEventListener('click', () => {
+          deleteModal.classList.add('hidden');
+          // Smooth mock notification feedback
+          const notice = document.createElement('div');
+          notice.className = 'fixed bottom-24 left-4 right-4 z-50 p-4 rounded-xl bg-inverse-surface text-inverse-on-surface shadow-xl text-center font-label-lg text-label-lg';
+          notice.textContent = 'রেকর্ডটি সফলভাবে আর্কাইভ করা হয়েছে।';
+          document.body.appendChild(notice);
+          setTimeout(() => notice.remove(), 2500);
+        });
+      }
+    }
+  })();
+</script></main><nav aria-label="Main Navigation" class="fixed bottom-0 w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.06)]" data-active-classes="text-primary font-bold"><div class="flex items-center justify-around h-20 px-space-xs"><a aria-label="হোম" class="min-h-[52px] min-w-[56px] flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-lg" data-path="home-dashboard" href="#"><span aria-hidden="true" class="material-symbols-outlined text-[24px]">home</span><span class="font-label-md text-label-md leading-none">হোম</span></a><div class="relative flex items-center justify-center -mt-5"><a aria-label="রোগ নির্ণয় ও স্ক্যান" class="min-h-[56px] px-space-md py-space-xs rounded-full bg-primary-container text-on-primary shadow-lg shadow-primary/25 flex items-center gap-2 hover:bg-primary transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" data-path="crop-scanner" href="#"><span aria-hidden="true" class="material-symbols-outlined text-[28px]">document_scanner</span><span class="font-label-lg text-label-lg font-bold pr-1">পরীক্ষা</span></a></div><a aria-label="হিস্ট্রি" class="min-h-[56px] px-space-md py-space-xs rounded-full bg-primary-container text-on-primary shadow-lg shadow-primary/25 flex items-center gap-2 hover:bg-primary transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" data-path="diagnostic-history" href="#"><span aria-hidden="true" class="material-symbols-outlined text-[24px]">history</span><span class="font-label-lg text-label-lg font-bold leading-none">হিস্ট্রি</span></a><a aria-label="প্রোফাইল" class="min-h-[52px] min-w-[56px] flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-lg" data-path="user-profile" href="#"><span aria-hidden="true" class="material-symbols-outlined text-[24px]">person</span><span class="font-label-md text-label-md leading-none">প্রোফাইল</span></a></div></nav></body></html>

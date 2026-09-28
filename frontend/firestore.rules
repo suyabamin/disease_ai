@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default rule: deny access to all unmapped collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // User Profile Documents: Users can only read and write their own profile
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      // User Detections Subcollection: Users can read, write, and delete their own detection history
+      match /detections/{detectionId} {
+        allow read, write, delete: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+  }
+}
