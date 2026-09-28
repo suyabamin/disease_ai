@@ -157,7 +157,12 @@ const DEMO_DATABASE: Record<string, Partial<DetectionResult>> = {
 };
 
 export class DemoInferenceProvider implements InferenceProvider {
-  async analyzeCropImage(imageData: string | File, selectedCrop: string = 'tomato'): Promise<DetectionResult> {
+  async analyzeCropImage(
+    imageData: string | File,
+    selectedCrop: string = 'tomato',
+    statusCallback?: (status: string) => void
+  ): Promise<DetectionResult> {
+    statusCallback?.('Connecting to AI service...');
     // Simulate real AI processing latency (1.8s)
     await new Promise((resolve) => setTimeout(resolve, 1800));
 

@@ -3,6 +3,7 @@ import { DetectionResult } from '../../types/detection';
 export interface InferenceProvider {
   analyzeCropImage(
     imageData: string | File,
-    selectedCrop?: string
+    selectedCrop?: string,
+    statusCallback?: (status: string) => void
   ): Promise<DetectionResult>;
 }

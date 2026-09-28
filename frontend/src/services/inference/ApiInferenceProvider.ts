@@ -71,13 +71,99 @@ interface ApiResponse {
 
 export class ApiInferenceProvider implements InferenceProvider {
   private baseUrl: string;
+  private readonly healthCheckTimeoutMs = 15000;
+  private readonly healthCheckRetryDelayMs = 4000;
+  private readonly maxHealthWaitMs = 90000;
+  private readonly predictionTimeoutMs = 75000;
+  private readonly predictionRetryCount = 2;
 
   constructor(baseUrl: string) {
     // Strip trailing slash
     this.baseUrl = baseUrl.replace(/\/$/, '');
   }
 
-  async analyzeCropImage(imageData: string | File, _selectedCrop?: string): Promise<DetectionResult> {
+  private delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  private isRetryablePredictionError(error: unknown): boolean {
+    if (error instanceof Error) {
+      const msg = error.message.toLowerCase();
+      return msg.includes('network') ||
+        msg.includes('fetch') ||
+        msg.includes('cannot reach') ||
+        msg.includes('unavailable') ||
+        msg.includes('model is not loaded') ||
+        msg.includes('timed out') ||
+        msg.includes('503') ||
+        msg.includes('failed to fetch');
+    }
+    return false;
+  }
+
+  private async waitForBackendReady(statusCallback?: (status: string) => void): Promise<void> {
+    const startedAt = Date.now();
+    let attempt = 0;
+
+    while (Date.now() - startedAt < this.maxHealthWaitMs) {
+      attempt += 1;
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), this.healthCheckTimeoutMs);
+
+      try {
+        statusCallback?.(attempt === 1 ? 'Connecting to AI service...' : 'AI service is starting...');
+
+        const response = await fetch(`${this.baseUrl}/api/health`, {
+          method: 'GET',
+          signal: controller.signal,
+        });
+
+        if (response.ok) {
+          const health = await response.json() as { status?: string; model_loaded?: boolean };
+          if (health?.status === 'ok' && health?.model_loaded === true) {
+            statusCallback?.('Loading AI model...');
+            return;
+          }
+        }
+      } catch (error) {
+        const message = error instanceof Error && error.name === 'AbortError'
+          ? 'AI service is starting...'
+          : 'AI service is starting...';
+        statusCallback?.(message);
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
+
+      if (Date.now() - startedAt >= this.maxHealthWaitMs) {
+        break;
+      }
+
+      await this.delay(this.healthCheckRetryDelayMs);
+    }
+
+    throw new Error('AI service unavailable. Ensure the backend server is running.');
+  }
+
+  private async sendPredictionRequest(formData: FormData): Promise<Response> {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), this.predictionTimeoutMs);
+
+    try {
+      return await fetch(`${this.baseUrl}/api/predict`, {
+        method: 'POST',
+        body: formData,
+        signal: controller.signal,
+      });
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
+  }
+
+  async analyzeCropImage(
+    imageData: string | File,
+    _selectedCrop?: string,
+    statusCallback?: (status: string) => void
+  ): Promise<DetectionResult> {
     // Build multipart/form-data — backend expects the field named "file"
     const formData = new FormData();
     if (imageData instanceof File) {
@@ -90,118 +176,125 @@ export class ApiInferenceProvider implements InferenceProvider {
       formData.append('file', blob, `image.${ext}`);
     }
 
-    let response: Response;
-    try {
-      response = await fetch(`${this.baseUrl}/api/predict`, {
-        method: 'POST',
-        body: formData,
-        // Do NOT set Content-Type header — browser sets it with boundary
-      });
-    } catch (networkError: any) {
-      // Network-level failure (server down, CORS, no internet)
-      throw new Error(
-        'AI service unavailable — cannot reach the backend server. ' +
-        'Make sure the FastAPI backend is running on ' + this.baseUrl
-      );
-    }
+    await this.waitForBackendReady(statusCallback);
+    statusCallback?.('Analyzing your image...');
 
-    // Non-2xx responses
-    if (!response.ok) {
-      let detail = `HTTP ${response.status}`;
+    let lastError: Error | null = null;
+
+    for (let attempt = 1; attempt <= this.predictionRetryCount + 1; attempt += 1) {
       try {
-        const errBody = await response.json();
-        detail = errBody?.detail || detail;
-        if (typeof detail === 'object') {
-          detail = (detail as any).error || JSON.stringify(detail);
+        const response = await this.sendPredictionRequest(formData);
+
+        if (!response.ok) {
+          let detail = `HTTP ${response.status}`;
+          try {
+            const errBody = await response.json();
+            detail = errBody?.detail || detail;
+            if (typeof detail === 'object') {
+              detail = (detail as any).error || JSON.stringify(detail);
+            }
+          } catch { /* ignore */ }
+
+          if (response.status === 503) {
+            throw new Error('AI service unavailable — model is not loaded on the backend.');
+          }
+          if (response.status === 422) {
+            throw new Error(`Image rejected: ${detail}`);
+          }
+          throw new Error(`AI API error: ${detail}`);
         }
-      } catch { /* ignore */ }
 
-      if (response.status === 503) {
-        throw new Error('AI service unavailable — model is not loaded on the backend.');
+        const data: ApiResponse = await response.json();
+
+        if (!data.success) {
+          throw new Error('AI API returned success=false. Check backend logs.');
+        }
+
+        // ── Low-confidence / Uncertain path ──────────────────────────────────
+        if (data.low_confidence || data.uncertain || !data.prediction) {
+          const topName = data.top_predictions?.[0]?.display_name || 'Uncertain';
+          const topConf = data.top_predictions?.[0]?.confidence ?? 0;
+          const topCrop = data.top_predictions?.[0]?.crop || 'Crop';
+
+          return {
+            classId: data.top_predictions?.[0]?.class_id,
+            crop: topCrop,
+            disease: topName,
+            confidence: topConf * 100,  // store as percentage for display
+            riskLevel: 'unknown',
+            confidenceLevel: data.confidence_level,
+            isHealthy: false,
+            uncertain: true,
+            margin: (data as any).margin ?? 0,
+            quality: (data as any).quality ? {
+              status: (data as any).quality.status,
+              brightness: (data as any).quality.brightness,
+              contrast: (data as any).quality.contrast,
+              blur_score: (data as any).quality.blur_score,
+              flags: (data as any).quality.quality_flags || []
+            } : undefined,
+            topPredictions: data.top_predictions || [],
+            symptoms: [],
+            immediateActions: [],
+            prevention: [],
+            treatmentGuidance: [],
+            disclaimer:
+              'AI classification result — confidence or image clarity below safety threshold. ' +
+              'Please consult a qualified agricultural expert before making treatment decisions.',
+            imageUrl: imageData instanceof File ? URL.createObjectURL(imageData) : imageData,
+            demo: false,
+            modelVersion: `${data.model.name} (${data.model.architecture})`,
+            createdAt: new Date().toISOString(),
+          };
+        }
+
+        // ── Confident path ───────────────────────────────────────────────────
+        const pred = data.prediction;
+        const confPct = pred.confidence_percent;  // already 0–100
+
+        return {
+          classId: pred.class_id,
+          crop: pred.crop,
+          disease: pred.display_name,   // "Tomato Late Blight"
+          confidence: confPct,           // stored as 0–100
+          riskLevel: confidenceToRiskLevel(pred.confidence),
+          confidenceLevel: data.confidence_level,
+          isHealthy: pred.disease.toLowerCase().includes('healthy'),
+          uncertain: false,
+          margin: (data as any).margin ?? 0,
+          quality: (data as any).quality ? {
+            status: (data as any).quality.status,
+            brightness: (data as any).quality.brightness,
+            contrast: (data as any).quality.contrast,
+            blur_score: (data as any).quality.blur_score,
+            flags: (data as any).quality.quality_flags || []
+          } : undefined,
+          topPredictions: data.top_predictions || [],
+          symptoms: [],
+          immediateActions: [],
+          prevention: [],
+          treatmentGuidance: [],
+          disclaimer:
+            'AI classification result. Please consult a qualified agricultural expert ' +
+            'before making any treatment or pesticide application decisions.',
+          imageUrl: imageData instanceof File ? URL.createObjectURL(imageData) : imageData,
+          demo: false,
+          modelVersion: `${data.model.name} v1.0`,
+          createdAt: new Date().toISOString(),
+        };
+      } catch (error) {
+        lastError = error instanceof Error ? error : new Error('Prediction failed.');
+
+        const canRetry = this.isRetryablePredictionError(lastError) && attempt <= this.predictionRetryCount;
+        if (!canRetry) {
+          throw lastError;
+        }
+
+        statusCallback?.('AI service is starting...');
+        await this.delay(4000);
       }
-      if (response.status === 422) {
-        throw new Error(`Image rejected: ${detail}`);
-      }
-      throw new Error(`AI API error: ${detail}`);
     }
 
-    const data: ApiResponse = await response.json();
-
-    if (!data.success) {
-      throw new Error('AI API returned success=false. Check backend logs.');
-    }
-
-    // ── Low-confidence / Uncertain path ──────────────────────────────────
-    if (data.low_confidence || data.uncertain || !data.prediction) {
-      const topName = data.top_predictions?.[0]?.display_name || 'Uncertain';
-      const topConf = data.top_predictions?.[0]?.confidence ?? 0;
-      const topCrop = data.top_predictions?.[0]?.crop || 'Crop';
-
-      return {
-        classId: data.top_predictions?.[0]?.class_id,
-        crop: topCrop,
-        disease: topName,
-        confidence: topConf * 100,  // store as percentage for display
-        riskLevel: 'unknown',
-        confidenceLevel: data.confidence_level,
-        isHealthy: false,
-        uncertain: true,
-        margin: (data as any).margin ?? 0,
-        quality: (data as any).quality ? {
-          status: (data as any).quality.status,
-          brightness: (data as any).quality.brightness,
-          contrast: (data as any).quality.contrast,
-          blur_score: (data as any).quality.blur_score,
-          flags: (data as any).quality.quality_flags || []
-        } : undefined,
-        topPredictions: data.top_predictions || [],
-        symptoms: [],
-        immediateActions: [],
-        prevention: [],
-        treatmentGuidance: [],
-        disclaimer:
-          'AI classification result — confidence or image clarity below safety threshold. ' +
-          'Please consult a qualified agricultural expert before making treatment decisions.',
-        imageUrl: imageData instanceof File ? URL.createObjectURL(imageData) : imageData,
-        demo: false,
-        modelVersion: `${data.model.name} (${data.model.architecture})`,
-        createdAt: new Date().toISOString(),
-      };
-    }
-
-    // ── Confident path ───────────────────────────────────────────────────
-    const pred = data.prediction;
-    const confPct = pred.confidence_percent;  // already 0–100
-
-    return {
-      classId: pred.class_id,
-      crop: pred.crop,
-      disease: pred.display_name,   // "Tomato Late Blight"
-      confidence: confPct,           // stored as 0–100
-      riskLevel: confidenceToRiskLevel(pred.confidence),
-      confidenceLevel: data.confidence_level,
-      isHealthy: pred.disease.toLowerCase().includes('healthy'),
-      uncertain: false,
-      margin: (data as any).margin ?? 0,
-      quality: (data as any).quality ? {
-        status: (data as any).quality.status,
-        brightness: (data as any).quality.brightness,
-        contrast: (data as any).quality.contrast,
-        blur_score: (data as any).quality.blur_score,
-        flags: (data as any).quality.quality_flags || []
-      } : undefined,
-      topPredictions: data.top_predictions || [],
-      symptoms: [],
-      immediateActions: [],
-      prevention: [],
-      treatmentGuidance: [],
-      disclaimer:
-        'AI classification result. Please consult a qualified agricultural expert ' +
-        'before making any treatment or pesticide application decisions.',
-      imageUrl: imageData instanceof File ? URL.createObjectURL(imageData) : imageData,
-      demo: false,
-      modelVersion: `${data.model.name} v1.0`,
-      createdAt: new Date().toISOString(),
-    };
+    throw lastError ?? new Error('AI service unavailable. Ensure the backend server is running.');
   }
 }

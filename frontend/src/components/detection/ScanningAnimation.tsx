@@ -4,11 +4,13 @@ import { useLanguage } from '../../i18n/LanguageContext';
 
 interface ScanningAnimationProps {
   imageUrl: string;
+  statusMessage?: string;
 }
 
-export const ScanningAnimation: React.FC<ScanningAnimationProps> = ({ imageUrl }) => {
+export const ScanningAnimation: React.FC<ScanningAnimationProps> = ({ imageUrl, statusMessage }) => {
   const { reducedMotion } = useAccessibility();
   const { language } = useLanguage();
+  const progressText = statusMessage || (language === 'bn' ? 'এআই বিশ্লেষণ চলছে...' : 'AI Analysis in Progress...');
 
   return (
     <div
@@ -56,7 +58,7 @@ export const ScanningAnimation: React.FC<ScanningAnimationProps> = ({ imageUrl }
           <div className="flex items-center gap-2">
             <span aria-hidden="true" className="w-2.5 h-2.5 rounded-full bg-tertiary-fixed animate-ping" />
             <span className="font-label-lg text-label-lg font-bold">
-              {language === 'bn' ? 'রোগের দাগ ও ধরন বিশ্লেষণ...' : 'Scanning Disease Patterns...'}
+              {progressText}
             </span>
           </div>
           <span className="font-label-md text-label-md text-tertiary-fixed font-mono font-bold">su0.1</span>
@@ -66,7 +68,7 @@ export const ScanningAnimation: React.FC<ScanningAnimationProps> = ({ imageUrl }
       <div className="flex flex-col items-center text-center gap-1">
         <span className="font-headline-md text-headline-md font-bold text-primary flex items-center gap-2">
           <span aria-hidden="true" className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-          {language === 'bn' ? 'এআই বিশ্লেষণ চলছে...' : 'AI Analysis in Progress...'}
+          {progressText}
         </span>
         <span className="font-label-md text-label-md text-on-surface-variant">
           {language === 'bn' ? 'দয়া করে কয়েক সেকেন্ড অপেক্ষা করুন' : 'Please wait a few seconds'}

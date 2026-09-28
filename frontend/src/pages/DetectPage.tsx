@@ -14,6 +14,7 @@ export const DetectPage: React.FC = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
+  const [backendStatus, setBackendStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const { language } = useLanguage();
@@ -53,6 +54,7 @@ export const DetectPage: React.FC = () => {
     if (!imageFile && !imagePreview) return;
 
     setIsAnalyzing(true);
+    setBackendStatus('Connecting to AI service...');
     setError(null);
 
     try {
@@ -77,7 +79,9 @@ export const DetectPage: React.FC = () => {
       //    Falls back to URL if no File is available
       const inferenceProvider = getInferenceProvider();
       const inferenceInput: File | string = imageFile || uploadedUrl;
-      const result = await inferenceProvider.analyzeCropImage(inferenceInput);
+      const result = await inferenceProvider.analyzeCropImage(inferenceInput, undefined, (status) => {
+        setBackendStatus(status);
+      });
 
       if (result.demo) {
         throw new Error(language === 'bn'
@@ -125,6 +129,7 @@ export const DetectPage: React.FC = () => {
       }
     } finally {
       setIsAnalyzing(false);
+      setBackendStatus(null);
     }
   };
 
@@ -208,8 +213,20 @@ export const DetectPage: React.FC = () => {
         </nav>
 
         {isAnalyzing && imagePreview ? (
-          /* Scanning Screen State */
-          <ScanningAnimation imageUrl={imagePreview} />
+          <div className="flex flex-col w-full gap-space-sm">
+            {backendStatus && (
+              <div
+                role="status"
+                aria-live="polite"
+                className="w-full rounded-2xl border border-primary/20 bg-primary/5 px-space-md py-3 text-center shadow-sm"
+              >
+                <p className="font-title-lg text-title-lg font-bold text-primary text-wrap break-words">
+                  {backendStatus}
+                </p>
+              </div>
+            )}
+            <ScanningAnimation imageUrl={imagePreview} statusMessage={backendStatus ?? undefined} />
+          </div>
         ) : (
           /* Viewfinder State */
           <Viewfinder
